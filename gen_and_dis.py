@@ -53,7 +53,7 @@ class Generator(Transformer):
 
         given_num = tf.argmax(
             tf.concat([tf.ones((1,), dtype=tf.float32) * (-1e5),
-                       tf.random_normal([min_len - 1, ], dtype=tf.float32)],
+                       tf.random_normal([min_len - 1,], dtype=tf.float32)],
                       axis=0), output_type=tf.int32)
 
         total_rewards = []
@@ -89,14 +89,6 @@ class Generator(Transformer):
             g_loss = - tf.reduce_sum(log_probs * tf.reshape(rewards, [-1])) / tf.to_float(batch_size)
             return g_loss
 
-    #def get_loss(self, gen_targets, real_inputs):
-    #    #with tf.variable_scope(self.name_scope, initializer=self.initializer, reuse=tf.AUTO_REUSE):
-    #    logits = self.inference(gen_targets, real_inputs)
-    #    xentropy, weights = metrics.padded_cross_entropy_loss(logits, real_inputs,
-    #                                                          self.params.label_smoothing,
-    #                                                          self.params.target_vocab_size)
-    #    loss = tf.reduce_sum(xentropy, axis=1) / tf.reduce_sum(weights, axis=1)  # [batch, 1]
-    #    return tf.reshape(loss, (-1, 1))
 
 class Discriminator(Transformer):
     def __init__(self, params, is_train, name_scope, mode=None):

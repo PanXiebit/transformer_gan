@@ -117,7 +117,6 @@ def build_graph(params):
             with tf.device('/gpu:%d' % i):
                 with tf.name_scope('%s_%d' % (TOWER_NAME, i)) as scope:
                     tf.logging.info("Build graph on gpu:{}".format(i))
-
                     # pretrain loss
                     logits = g_model.inference(train_iterator.source, train_iterator.target)
                     xentropy, weights = metrics.padded_cross_entropy_loss(
@@ -171,7 +170,8 @@ def build_graph(params):
 
     train_op = tf.group(apply_gradient_op, g_apply_gradient_op)
 
-    train_return = (train_op, global_step, g_loss, xen_loss, rewards, learning_rate, init_step, roll_mean_loss, real_mean_loss)
+    train_return = (train_op, global_step, g_loss, xen_loss, rewards,
+                    learning_rate, init_step, roll_mean_loss, real_mean_loss)
     valid_return = (val_pred, valid_iterator.target, valid_iterator.source)
     dataset_iter = (train_iterator, valid_iterator)
     return g_model, d_model, train_return, valid_return, dataset_iter
@@ -179,16 +179,14 @@ def build_graph(params):
 def train(params):
     with tf.Graph().as_default(), tf.device('/cpu:0'):
         g_model, d_model, train_return, valid_return, dataset_iter = build_graph(params)
-        train_op, global_step, g_loss, xen_loss, rewards, learning_rate, init_step, roll_mean_loss, real_mean_loss = train_return
+        train_op, global_step, g_loss, xen_loss, rewards, learning_rate, \
+            init_step, roll_mean_loss, real_mean_loss = train_return
         val_pred, val_tgt, val_src = valid_return
         train_iterator, valid_iterator = dataset_iter
 
 
         vars_to_update = tf.global_variables()
         print("total variables number is %i"%len(vars_to_update))
-        #for var in vars_to_update:
-        #    print(var)
-        #exit() 
         update_op = train_helper.update_checkpoint(vars_to_update, replace_from="Transformer",
                                                    replace_to="Discriminator")
 
@@ -213,14 +211,9 @@ def train(params):
                 tf.logging.info("Reloading model parameters..from {}".format(ckpt))
                 variables = tf.global_variables()
                 var_keep_dic = train_helper.get_variables_in_checkpoint_file(ckpt)
-                #var_keep_dic.pop('global_step')
-                #for var, var_name in var_keep_dic.items():
-                #    print(var, var_name)
-                #exit()
                 variables_to_restore = []
                 for v in variables:
                     if v.name.split(':')[0] in var_keep_dic:
-                        #print(v.name)
                         variables_to_restore.append(v)
                 restorer = tf.train.Saver(variables_to_restore)
                 restorer.restore(sess, ckpt)
@@ -233,21 +226,21 @@ def train(params):
             best_bleu = 0.0
             sess.run(update_op)
             for step in xrange(init_step, flags_obj.train_steps):
-
-                # Train generator for 5 steps
-                #tf.logging.info("Training generator")
                 g_steps_per_iter = 5
                 for g_step in range(g_steps_per_iter):
                     _, x_loss_value, g_loss_value, rewards_value, roll_loss, real_loss = sess.run(
-                        [train_op, xen_loss, g_loss, rewards, roll_mean_loss, real_mean_loss])
+                        [train_op, xen_loss, g_loss, rewards, roll_mean_loss, real_mean_loss],
+                        feed_dict={g_model.dropout_rate: 0.0,
+                                   d_model.dropout_rate: 0.1})
 
                     assert not np.isnan(g_loss_value), 'Model diverged with loss = NaN'
                     assert not np.isnan(x_loss_value), 'Model diverged with loss = NaN'
 
                     if step % 50 == 0:
                         tf.logging.info(
-                            "step = {}, g_loss = {:.4f}, x_loss = {:.4f}, roll_loss = {:.4f}, real_loss = {:.4f}, reward = {}".
-                            format(step, g_loss_value, x_loss_value, roll_loss, real_loss, rewards_value[:5]))
+                            "step = {}, g_loss = {:.4f}, x_loss = {:.4f}, roll_loss = {:.4f}, "
+                            "real_loss = {:.4f}, reward = {}".format(
+                                step, g_loss_value, x_loss_value, roll_loss, real_loss, rewards_value[:5]))
 
                 # train discriminator
                 sess.run(update_op)
@@ -260,7 +253,10 @@ def train(params):
                     total_size = 0
                     while True:
                         try:
-                            val_tgt_np, val_src_np, val_pred_np = sess.run([val_tgt, val_src, val_pred])
+                            val_tgt_np, val_src_np, val_pred_np = sess.run(
+                                [val_tgt, val_src, val_pred],
+                                feed_dict={g_model.dropout_rate: 0.0,
+                                           d_model.dropout_rate: 0.0})
                             val_bleu = metrics.compute_bleu(val_tgt_np, val_pred_np)
                             batch_size = val_pred_np.shape[0]
                             total_bleu += val_bleu * batch_size

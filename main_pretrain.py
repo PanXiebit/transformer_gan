@@ -237,7 +237,8 @@ def train(params):
                     while True:
                         try:
                             val_pred, val_tgt, val_src = sess.run(
-                                [valid_pred, valid_tgt, valid_src], feed_dict={g_model.dropout_rate: 0.0})
+                                [valid_pred, valid_tgt, valid_src],
+                                feed_dict={g_model.dropout_rate: 0.0})
                             val_bleu = metrics.compute_bleu(val_tgt, val_pred)
                             batch_size = val_pred.shape[0]
                             total_bleu += val_bleu * batch_size
