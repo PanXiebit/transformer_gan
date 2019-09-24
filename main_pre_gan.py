@@ -127,7 +127,7 @@ def build_graph(params):
                     # g_loss
                     gen_samples = g_model.inference(train_iterator.source, None)["outputs"]
                     deal_samples = train_helper._trim_and_pad(gen_samples)
-                    given_num, rewards,roll_mean_loss, real_mean_loss = g_model.get_reward(
+                    given_num, rewards, roll_mean_loss, real_mean_loss = g_model.get_reward(
                         real_inputs=train_iterator.source,
                         real_targets=train_iterator.target,
                         gen_targets=deal_samples,
@@ -214,10 +214,13 @@ def train(params):
                 variables = tf.global_variables()
                 var_keep_dic = train_helper.get_variables_in_checkpoint_file(ckpt)
                 #var_keep_dic.pop('global_step')
-
+                #for var, var_name in var_keep_dic.items():
+                #    print(var, var_name)
+                #exit()
                 variables_to_restore = []
                 for v in variables:
                     if v.name.split(':')[0] in var_keep_dic:
+                        #print(v.name)
                         variables_to_restore.append(v)
                 restorer = tf.train.Saver(variables_to_restore)
                 restorer.restore(sess, ckpt)
@@ -228,6 +231,7 @@ def train(params):
             summary_writer = tf.summary.FileWriter(flags_obj.model_dir, sess.graph)
 
             best_bleu = 0.0
+            sess.run(update_op)
             for step in xrange(init_step, flags_obj.train_steps):
 
                 # Train generator for 5 steps

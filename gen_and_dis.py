@@ -33,7 +33,6 @@ class Generator(Transformer):
                 return given_num + 1, given_y
 
             given_y = gen_samples[:, :given_num]
-            print(given_y)
             init_given_y = tf.pad(given_y, [[0, 0], [0, max_len - given_num]])
             init_given_num = given_num
 
@@ -90,17 +89,38 @@ class Generator(Transformer):
             g_loss = - tf.reduce_sum(log_probs * tf.reshape(rewards, [-1])) / tf.to_float(batch_size)
             return g_loss
 
+    #def get_loss(self, gen_targets, real_inputs):
+    #    #with tf.variable_scope(self.name_scope, initializer=self.initializer, reuse=tf.AUTO_REUSE):
+    #    logits = self.inference(gen_targets, real_inputs)
+    #    xentropy, weights = metrics.padded_cross_entropy_loss(logits, real_inputs,
+    #                                                          self.params.label_smoothing,
+    #                                                          self.params.target_vocab_size)
+    #    loss = tf.reduce_sum(xentropy, axis=1) / tf.reduce_sum(weights, axis=1)  # [batch, 1]
+    #    return tf.reshape(loss, (-1, 1))
 
 class Discriminator(Transformer):
     def __init__(self, params, is_train, name_scope, mode=None):
         super(Discriminator, self).__init__(params, is_train, mode=None, scope=name_scope)
         self.name_scope = name_scope
 
+    #def get_loss(self, gen_targets, real_inputs):
+    #    #with tf.variable_scope(self.name_scope, initializer=self.initializer, reuse=tf.AUTO_REUSE):
+    #    logits = self.inference(gen_targets, real_inputs)
+    #    xentropy, weights = metrics.padded_cross_entropy_loss(logits, real_inputs,
+    #                                                          self.params.label_smoothing,
+    #                                                          self.params.target_vocab_size)
+    #    loss = tf.reduce_sum(xentropy, axis=1) / tf.reduce_sum(weights, axis=1)  # [batch, 1]
+    #    return tf.reshape(loss, (-1, 1))
+
     def get_loss(self, gen_targets, real_inputs):
-        #with tf.variable_scope(self.name_scope, initializer=self.initializer, reuse=tf.AUTO_REUSE):
-        logits = self.inference(gen_targets, real_inputs)
-        xentropy, weights = metrics.padded_cross_entropy_loss(logits, real_inputs,
-                                                              self.params.label_smoothing,
-                                                              self.params.target_vocab_size)
-        loss = tf.reduce_sum(xentropy, axis=1) / tf.reduce_sum(weights, axis=1)  # [batch, 1]
-        return tf.reshape(loss, (-1, 1))
+        with tf.variable_scope(self.name_scope, initializer=self.initializer, reuse=tf.AUTO_REUSE):
+            attention_bias = model_utils.get_padding_bias(gen_targets)
+            encoder_outputs = self.encode(gen_targets, attention_bias)
+
+            logits = self.decode(real_inputs, encoder_outputs, attention_bias)
+
+            xentropy, weights = metrics.padded_cross_entropy_loss(logits, real_inputs,
+                                                                  self.params.label_smoothing,
+                                                                  self.params.target_vocab_size)
+            loss = tf.reduce_sum(xentropy, axis=1) / tf.reduce_sum(weights, axis=1)  # [batch, 1]
+            return tf.reshape(loss, (-1, 1))

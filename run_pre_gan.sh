@@ -11,7 +11,7 @@ BASE_DIR2=/home/work/xiepan/xp_dial/gan_nmt/transformer_gan
 # sharing embedding
 python3 main_pre_gan.py \
     --num_gpus 2 \
-    --roll_num 5 \
+    --roll_num 1 \
     --param_set base \
     --data_dir ${BASE_DIR}/data/en-tr/data_total/gen_data \
     --model_dir ${BASE_DIR2}/data/en-tr/model_save/train_base_gan \

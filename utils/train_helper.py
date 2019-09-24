@@ -74,6 +74,7 @@ def update_checkpoint(var_list, replace_from, replace_to):
         elif replace_to in var_name:
             if "Adam" not in var_name:
                 new_name = var_name.replace(replace_to, replace_from)
+                tf.logging.info("Update {} from {}".format(var_name, new_name))
                 update_op.append(tf.assign(var, var_map[new_name]))
         else:
             print(var)
@@ -85,7 +86,7 @@ def average_gradients(tower_grads):
     for grad_and_vars in zip(*tower_grads):
         grads = []
         for g, var in grad_and_vars:
-            tf.logging.info("gradient: {}, var: {}".format(g, var))
+            #tf.logging.info("gradient: {}, var: {}".format(g, var))
             expanded_g = tf.expand_dims(g, 0)
             grads.append(expanded_g)
 
