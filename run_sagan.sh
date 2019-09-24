@@ -1,29 +1,23 @@
 #!bin/bash
+# train from scratch without pre-train.
 
-
-export CUDA_VISIBLE_DEVICES="6,7"
+export CUDA_VISIBLE_DEVICES="7"
 export LD_LIBRARY_PATH=/usr/local/nccl_2.3.4/lib:$LD_LIBRARY_PATH
 
-BASE_DIR=/home/work/xiepan/xp_dial/gan_nmt/transformer_sagan
-BASE_DIR2=/home/work/xiepan/xp_dial/gan_nmt/transformer_gan
-
-
 # sharing embedding
-python3 main_pre_gan.py \
-    --num_gpus 2 \
-    --roll_num 5 \
+BASE_DIR=/home/work/xiepan/xp_dial/gan_nmt/transformer_gan
+# sharing embedding
+python3 main_sagan.py \
+    --num_gpus 1 \
     --param_set base \
-    --data_dir ${BASE_DIR}/data/en-tr/data_total/gen_data \
-    --model_dir ${BASE_DIR2}/data/en-tr/model_save/train_base_gan \
-    --pretrain_dir /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base \
-    --learning_rate 2.0 \
-    --batch_size  3000 \
+    --data_dir  ${BASE_DIR}/data/en-tr/data_total/gen_data   \
+    --model_dir ${BASE_DIR}/data/en-tr/data_total/model_save/train_gan_4 \
+    --learning_rate 2 \
+    --batch_size 150 \
     --max_length 50 \
     --fro src \
     --to tgt \
-    --save_checkpoints_secs 1200 \
-    --train_steps 35000 \
-    --steps_between_evals 1000 \
+    --train_steps 20000 \
     --extra_decode_length 20
 
 

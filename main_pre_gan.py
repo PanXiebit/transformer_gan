@@ -125,41 +125,53 @@ def build_graph(params):
                     xen_loss = tf.reduce_sum(xentropy) / tf.reduce_sum(weights)
 
                     # g_loss
-                    gen_samples = g_model.inference(train_iterator.source, None)
+                    gen_samples = g_model.inference(train_iterator.source, None)["outputs"]
                     deal_samples = train_helper._trim_and_pad(gen_samples)
-
-                    given_num, rewards = g_model.get_reward(real_inputs=train_iterator.source,
-                                                            real_targets=deal_samples,
-                                                            gen_targets=train_iterator.target,
-                                                            roll_num=flags_obj.roll_num,
-                                                            discriminator=d_model)
+                    given_num, rewards,roll_mean_loss, real_mean_loss = g_model.get_reward(
+                        real_inputs=train_iterator.source,
+                        real_targets=train_iterator.target,
+                        gen_targets=deal_samples,
+                        roll_num=flags_obj.roll_num,
+                        discriminator=d_model)
                     g_loss = g_model.g_loss(gen_targets=deal_samples,
                                             given_num=given_num,
                                             rewards=rewards)
+                    
+                    xen_grads = optimizer.compute_gradients(xen_loss)
+                    gen_grads = optimizer.compute_gradients(g_loss)
+                    
+                    g_grads = []
+                    x_grads = []
+                    for grad, var in gen_grads:
+                        if "Transformer" in var.name:
+                            g_grads.append((grad, var))
+                    for grad, var in xen_grads:
+                        if "Transformer" in var.name:
+                            x_grads.append((grad, var)) 
 
-                    grads = optimizer.compute_gradients(xen_loss)
-                    g_grads = optimizer.compute_gradients(g_loss)
-                    tf.logging.info("total trainable variables number: {}".format(len(grads)))
-                    tower_grads.append(grads)
+                    tf.logging.info("total trainable variables number: {}, {}".format(len(g_grads), len(x_grads)))
+                    tower_grads.append(x_grads)
                     g_tower_grads.append(g_grads)
 
                 if i == 0 and valid_iterator:
                     val_pred = g_model.inference(inputs=valid_iterator.source,
-                                                      targets=None)
+                                                 targets=None)["outputs"]
 
+    
     if len(tower_grads) > 1:
-        grads = train_helper.average_gradients(tower_grads)
+        print(len(tower_grads[0]), len(tower_grads[1]))
+        x_grads = train_helper.average_gradients(tower_grads)
         g_grads = train_helper.average_gradients(g_tower_grads)
     else:
-        grads = tower_grads[0]
+        x_grads = tower_grads[0]
         g_grads = g_tower_grads[0]
 
-    apply_gradient_op = optimizer.apply_gradients(grads, global_step=global_step)
+    apply_gradient_op = optimizer.apply_gradients(x_grads, global_step=global_step)
     g_apply_gradient_op = optimizer.apply_gradients(g_grads, global_step=global_step)
 
     train_op = tf.group(apply_gradient_op, g_apply_gradient_op)
 
-    train_return = (train_op, global_step, g_loss, xen_loss, rewards, learning_rate, init_step)
+    train_return = (train_op, global_step, g_loss, xen_loss, rewards, learning_rate, init_step, roll_mean_loss, real_mean_loss)
     valid_return = (val_pred, valid_iterator.target, valid_iterator.source)
     dataset_iter = (train_iterator, valid_iterator)
     return g_model, d_model, train_return, valid_return, dataset_iter
@@ -167,12 +179,16 @@ def build_graph(params):
 def train(params):
     with tf.Graph().as_default(), tf.device('/cpu:0'):
         g_model, d_model, train_return, valid_return, dataset_iter = build_graph(params)
-        train_op, global_step, g_loss, xen_loss, rewards, learning_rate, init_step = train_return
+        train_op, global_step, g_loss, xen_loss, rewards, learning_rate, init_step, roll_mean_loss, real_mean_loss = train_return
         val_pred, val_tgt, val_src = valid_return
         train_iterator, valid_iterator = dataset_iter
 
 
         vars_to_update = tf.global_variables()
+        print("total variables number is %i"%len(vars_to_update))
+        #for var in vars_to_update:
+        #    print(var)
+        #exit() 
         update_op = train_helper.update_checkpoint(vars_to_update, replace_from="Transformer",
                                                    replace_to="Discriminator")
 
@@ -183,8 +199,6 @@ def train(params):
         sess_config.gpu_options.allow_growth = True
         sess_config.allow_soft_placement = True
 
-
-
         with tf.Session(config=sess_config) as sess:
             sess.run(tf.global_variables_initializer())
             sess.run(tf.local_variables_initializer())
@@ -192,13 +206,14 @@ def train(params):
             sess.run(train_iterator.initializer)
 
             # reload the parameters
-            ckpt = tf.train.latest_checkpoint(flags_obj.model_dir)
+            print(flags_obj.pretrain_dir)
+            ckpt = tf.train.latest_checkpoint(flags_obj.pretrain_dir)
             tf.logging.info("ckpt {}".format(ckpt))
             if ckpt and tf.train.checkpoint_exists(ckpt):
                 tf.logging.info("Reloading model parameters..from {}".format(ckpt))
                 variables = tf.global_variables()
                 var_keep_dic = train_helper.get_variables_in_checkpoint_file(ckpt)
-                var_keep_dic.pop('global_step')
+                #var_keep_dic.pop('global_step')
 
                 variables_to_restore = []
                 for v in variables:
@@ -216,19 +231,19 @@ def train(params):
             for step in xrange(init_step, flags_obj.train_steps):
 
                 # Train generator for 5 steps
-                tf.logging.info("Training generator")
+                #tf.logging.info("Training generator")
                 g_steps_per_iter = 5
                 for g_step in range(g_steps_per_iter):
-                    _, x_loss_value, g_loss_value, rewards_value = sess.run(
-                        [train_op, xen_loss, g_loss, rewards])
+                    _, x_loss_value, g_loss_value, rewards_value, roll_loss, real_loss = sess.run(
+                        [train_op, xen_loss, g_loss, rewards, roll_mean_loss, real_mean_loss])
 
                     assert not np.isnan(g_loss_value), 'Model diverged with loss = NaN'
                     assert not np.isnan(x_loss_value), 'Model diverged with loss = NaN'
 
-                    if step % 100 == 0:
+                    if step % 50 == 0:
                         tf.logging.info(
-                            "step = {}, g_loss = {:.4f}, x_loss = {:.4f}, reward = {}".
-                            format(step, g_loss_value, x_loss_value, rewards_value[:5]))
+                            "step = {}, g_loss = {:.4f}, x_loss = {:.4f}, roll_loss = {:.4f}, real_loss = {:.4f}, reward = {}".
+                            format(step, g_loss_value, x_loss_value, roll_loss, real_loss, rewards_value[:5]))
 
                 # train discriminator
                 sess.run(update_op)

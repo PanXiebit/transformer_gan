@@ -52,7 +52,7 @@ class TransformerBaseParams(object):
 
     # Default prediction params
     extra_decode_length = 20
-    beam_size = 1
+    beam_size = 4
     alpha = 0.6  # used to calculate length normalization in beam search
 
 

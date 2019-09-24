@@ -84,7 +84,8 @@ def average_gradients(tower_grads):
     average_grads = []
     for grad_and_vars in zip(*tower_grads):
         grads = []
-        for g, _ in grad_and_vars:
+        for g, var in grad_and_vars:
+            tf.logging.info("gradient: {}, var: {}".format(g, var))
             expanded_g = tf.expand_dims(g, 0)
             grads.append(expanded_g)
 

@@ -62,6 +62,11 @@ flags.DEFINE_integer(
     help="Maximum length of example.")
 # assert not (multi_gpu and num_gpu)
 
+flags.DEFINE_integer(
+    name="extra_decode_length", short_name="edl", default=20,    
+    help="Maximum length of example.")                                             
+# assert not (multi_gpu and num_gpu)
+
 flags.DEFINE_bool(
     name="multi_gpu", default=True,
     help="If set, run across all available GPUs.")
