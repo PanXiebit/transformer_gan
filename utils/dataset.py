@@ -115,7 +115,9 @@ class Dataset(object):
             # Batch the dataset and add padding so that all input sequences in the
             # examples have the same length, and all target sequences have the same
             # lengths as well. Resulting lengths of inputs and targets can differ.
-            return grouped_dataset.padded_batch(bucket_batch_size, ([None], [None]))
+            # return grouped_dataset.padded_batch(bucket_batch_size, ([None], [None]))
+
+            return grouped_dataset.padded_batch(bucket_batch_size, ([max_length], [max_length]))
 
         return dataset.apply(tf.contrib.data.group_by_window(
             key_func=example_to_bucket_id,
