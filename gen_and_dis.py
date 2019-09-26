@@ -22,7 +22,7 @@ class Generator(Transformer):
                 return given_num < max_len
 
             def inner_loop(given_num, given_y):
-                logits = self.decode(given_y, self.encoder_outputs, self.attention_bias)
+                logits = self.decode(given_y, self.encoder_outputs, self.attention_bias) # [batch, given_num, vocab_size]
                 next_logits = logits[:, given_num, :]  # [batch, decoder_vocab_size]
                 next_probs = tf.nn.softmax(next_logits)
                 log_probs = tf.log(next_probs)
@@ -47,6 +47,7 @@ class Generator(Transformer):
 
     def get_reward(self, real_inputs, real_targets, gen_targets, roll_num, discriminator):
         real_loss = discriminator.get_loss(real_targets, real_inputs)  # [batch ,1]
+        base_f_loss = discriminator.get_loss(gen_targets, real_inputs)
         max_len = tf.shape(gen_targets)[1]
         lengths = tf.reduce_sum(tf.cast(tf.not_equal(gen_targets, PAD_ID), tf.int32), axis=1)
         min_len = lengths[tf.argmin(lengths)]
@@ -72,6 +73,8 @@ class Generator(Transformer):
             total_rewards.append(cur_reward)  # list, [batch,1] * roll_num
             roll_losses.append(roll_loss)
         total_rewards = tf.reduce_mean(tf.concat(total_rewards, axis=1), axis=1)  # [bacth, roll_num] -> [batch, ]
+        base_reward = tf.reshape(1 / tf.maximum(base_f_loss / real_loss, 1), (-1,))   # [batch, ]
+        total_rewards = tf.maximum(total_rewards - base_reward, 0.0)                  # [batch, ]
         roll_mean_loss = tf.reduce_mean(tf.concat(roll_losses, axis=1))
         real_mean_loss = tf.reduce_mean(real_loss)
         return given_num, total_rewards, roll_mean_loss, real_mean_loss
@@ -84,7 +87,7 @@ class Generator(Transformer):
             batch_size = tf.shape(gen_targets)[0]
             probs = tf.nn.softmax(logits[:, -1, :], axis=-1)  # probability, [batch, dec_vocab_size]
             log_probs = tf.reduce_sum(tf.one_hot(given_y[:, -1], self.params.target_vocab_size, 1.0, 0.0) * tf.log(
-                tf.clip_by_value(probs, 1e-20, 1.0)), axis=1)
+                tf.clip_by_value(probs, 1e-20, 1.0)), axis=1)              # [batch, ]
             rewards = tf.stop_gradient(rewards)
             g_loss = - tf.reduce_sum(log_probs * tf.reshape(rewards, [-1])) / tf.to_float(batch_size)
             return g_loss

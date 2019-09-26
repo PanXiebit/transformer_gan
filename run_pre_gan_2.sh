@@ -1,31 +1,30 @@
 #!bin/bash
 
 
-export CUDA_VISIBLE_DEVICES="6,7"
+export CUDA_VISIBLE_DEVICES="0,1,2,3"
 export LD_LIBRARY_PATH=/usr/local/nccl_2.3.4/lib:$LD_LIBRARY_PATH
 
-BASE_DIR=/home/work/xiepan/xp_dial/gan_nmt/transformer_sagan
-BASE_DIR2=/home/work/xiepan/xp_dial/gan_nmt/transformer_gan
+BASE_DIR=/home/work/xiepan/xp_dial/gan_nmt/transformer_gan
 
 
 # sharing embedding
-python3 main_pre_gan.py \
-    --num_gpus 2 \
-    --roll_num 1 \
+python3 main_pre_gan_2.py \
+    --num_gpus 4 \
+    --roll_num 5 \
     --param_set base \
     --data_dir ${BASE_DIR}/data/en-tr/data_total/gen_data \
-    --model_dir ${BASE_DIR2}/data/en-tr/model_save/train_base_gan \
-    --pretrain_dir /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base \
+    --model_dir ${BASE_DIR}/data/en-tr/model_save/train_base_gan_2 \
+    --pretrain_dir ${BASE_DIR}/data/en-tr/model_save/train_base \
     --learning_rate 2.0 \
-    --batch_size  3000 \
+    --batch_size  900 \
     --max_length 50 \
     --fro src \
     --to tgt \
     --save_checkpoints_secs 1200 \
     --train_steps 35000 \
     --steps_between_evals 200 \
-    --extra_decode_length 0
-
+    --extra_decode_length 0 \
+    --shared_embedding_softmax_weights true
 
 
 # not sharing embedding

@@ -51,7 +51,7 @@ class TransformerBaseParams(object):
     optimizer_adam_epsilon = 1e-09
 
     # Default prediction params
-    extra_decode_length = 20
+    extra_decode_length = 0
     beam_size = 4
     alpha = 0.6  # used to calculate length normalization in beam search
 

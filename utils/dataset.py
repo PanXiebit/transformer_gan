@@ -323,11 +323,11 @@ class MyDataset(object):
 
 if __name__ == "__main__":
     class Params(object):
-        data_dir_mono = "/home/work/xiepan/xp_dial/gan_nmt/transformer_rl/data/en-tr/v1_mono/gen_data"
-        data_dir = "/home/work/xiepan/xp_dial/gan_nmt/transformer_rl/data/en-tr/v1/gen_data"
+        #data_dir_mono = "/home/work/xiepan/xp_dial/gan_nmt/transformer_rl/data/en-tr/v1_mono/gen_data"
+        data_dir = "/home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/data_total/gen_data"
         is_reversed = False
         batch_size = 500  # 这里的batch_size 不是最终的batch_size,这个值必须大于 max_length
-        max_length = 50
+        max_length = 10
         num_parallel_calls = 6
         repeat_dataset = 1
 
@@ -343,7 +343,7 @@ if __name__ == "__main__":
     #    print(content[0].shape)
     params = Params()
     dataset = Dataset(params)
-    input_fn = dataset.train_input_fn_mono(params)
+    input_fn = dataset.train_input_fn(params)
     #iterator = train_dataset.make_initializable_iterator()
     #batch = iterator.get_next()
 

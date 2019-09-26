@@ -1,128 +1,607 @@
 nohup: ignoring input
 INFO:tensorflow:sharing vocab size:29748
-I0924 19:16:24.241875 140061786756928 tf_logging.py:115] sharing vocab size:29748
+I0924 20:14:44.471167 140427292555072 tf_logging.py:115] sharing vocab size:29748
 WARNING:tensorflow:From /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/utils/dataset.py:41: parallel_interleave (from tensorflow.contrib.data.python.ops.interleave_ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Use `tf.data.experimental.parallel_interleave(...)`.
-W0924 19:16:26.389792 140061786756928 tf_logging.py:125] From /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/utils/dataset.py:41: parallel_interleave (from tensorflow.contrib.data.python.ops.interleave_ops) is deprecated and will be removed in a future version.
+W0924 20:14:46.582540 140427292555072 tf_logging.py:125] From /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/utils/dataset.py:41: parallel_interleave (from tensorflow.contrib.data.python.ops.interleave_ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Use `tf.data.experimental.parallel_interleave(...)`.
 WARNING:tensorflow:From /home/work/venv/xie_py3.6/lib/python3.6/site-packages/tensorflow/python/ops/sparse_ops.py:1165: sparse_to_dense (from tensorflow.python.ops.sparse_ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Create a `tf.sparse.SparseTensor` and use `tf.sparse.to_dense` instead.
-W0924 19:16:26.410741 140061786756928 tf_logging.py:125] From /home/work/venv/xie_py3.6/lib/python3.6/site-packages/tensorflow/python/ops/sparse_ops.py:1165: sparse_to_dense (from tensorflow.python.ops.sparse_ops) is deprecated and will be removed in a future version.
+W0924 20:14:46.603217 140427292555072 tf_logging.py:125] From /home/work/venv/xie_py3.6/lib/python3.6/site-packages/tensorflow/python/ops/sparse_ops.py:1165: sparse_to_dense (from tensorflow.python.ops.sparse_ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Create a `tf.sparse.SparseTensor` and use `tf.sparse.to_dense` instead.
 WARNING:tensorflow:From /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/utils/dataset.py:124: group_by_window (from tensorflow.contrib.data.python.ops.grouping) is deprecated and will be removed in a future version.
 Instructions for updating:
 Use `tf.data.experimental.group_by_window(...)`.
-W0924 19:16:26.421051 140061786756928 tf_logging.py:125] From /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/utils/dataset.py:124: group_by_window (from tensorflow.contrib.data.python.ops.grouping) is deprecated and will be removed in a future version.
+W0924 20:14:46.613424 140427292555072 tf_logging.py:125] From /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/utils/dataset.py:124: group_by_window (from tensorflow.contrib.data.python.ops.grouping) is deprecated and will be removed in a future version.
 Instructions for updating:
 Use `tf.data.experimental.group_by_window(...)`.
 INFO:tensorflow:Build graph on gpu:0
-I0924 19:16:26.609983 140061786756928 tf_logging.py:115] Build graph on gpu:0
+I0924 20:14:46.802091 140427292555072 tf_logging.py:115] Build graph on gpu:0
 /home/work/venv/xie_py3.6/lib/python3.6/site-packages/tensorflow/python/ops/gradients_impl.py:112: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
   "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
 INFO:tensorflow:total trainable variables number: 125
-I0924 19:16:34.179347 140061786756928 tf_logging.py:115] total trainable variables number: 125
+I0924 20:14:54.310944 140427292555072 tf_logging.py:115] total trainable variables number: 125
 WARNING:tensorflow:From /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/model/beam_search.py:420: calling reduce_logsumexp (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
 Instructions for updating:
 keep_dims is deprecated, use keepdims instead
-W0924 19:16:37.473169 140061786756928 tf_logging.py:125] From /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/model/beam_search.py:420: calling reduce_logsumexp (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+W0924 20:14:57.300611 140427292555072 tf_logging.py:125] From /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/model/beam_search.py:420: calling reduce_logsumexp (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
 Instructions for updating:
 keep_dims is deprecated, use keepdims instead
-2019-09-24 19:16:39.485700: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
-2019-09-24 19:16:41.578150: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2019-09-24 19:16:41.608587: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
+INFO:tensorflow:Build graph on gpu:1
+I0924 20:14:57.426263 140427292555072 tf_logging.py:115] Build graph on gpu:1
+INFO:tensorflow:total trainable variables number: 125
+I0924 20:15:04.348847 140427292555072 tf_logging.py:115] total trainable variables number: 125
+2019-09-24 20:15:06.696236: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2019-09-24 20:15:07.643018: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-09-24 20:15:07.650792: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
 name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
-pciBusID: 0000:dc:00.0
-totalMemory: 15.78GiB freeMemory: 14.58GiB
-2019-09-24 19:16:41.608643: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
-2019-09-24 19:16:43.785756: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
-2019-09-24 19:16:43.785820: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
-2019-09-24 19:16:43.785831: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
-2019-09-24 19:16:43.786127: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 14104 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:dc:00.0, compute capability: 7.0)
-INFO:tensorflow:ckpt /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-11000
-I0924 19:16:46.841042 140061786756928 tf_logging.py:115] ckpt /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-11000
-INFO:tensorflow:Reloading model parameters..from /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-11000
-I0924 19:16:46.842976 140061786756928 tf_logging.py:115] Reloading model parameters..from /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-11000
-INFO:tensorflow:Restoring parameters from /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-11000
-I0924 19:16:46.844640 140061786756928 tf_logging.py:115] Restoring parameters from /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-11000
+pciBusID: 0000:b1:00.0
+totalMemory: 15.78GiB freeMemory: 6.83GiB
+2019-09-24 20:15:08.429357: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-09-24 20:15:08.432478: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 1 with properties: 
+name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:b2:00.0
+totalMemory: 15.78GiB freeMemory: 6.83GiB
+2019-09-24 20:15:08.432534: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0, 1
+2019-09-24 20:15:11.143423: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-09-24 20:15:11.143492: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 1 
+2019-09-24 20:15:11.143507: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N Y 
+2019-09-24 20:15:11.143519: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 1:   Y N 
+2019-09-24 20:15:11.144288: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6565 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:b1:00.0, compute capability: 7.0)
+2019-09-24 20:15:11.144827: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:1 with 6565 MB memory) -> physical GPU (device: 1, name: Tesla V100-SXM2-16GB, pci bus id: 0000:b2:00.0, compute capability: 7.0)
+INFO:tensorflow:ckpt /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-4000
+I0924 20:15:15.660722 140427292555072 tf_logging.py:115] ckpt /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-4000
+INFO:tensorflow:Reloading model parameters..from /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-4000
+I0924 20:15:15.662161 140427292555072 tf_logging.py:115] Reloading model parameters..from /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-4000
+INFO:tensorflow:Restoring parameters from /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-4000
+I0924 20:15:15.663409 140427292555072 tf_logging.py:115] Restoring parameters from /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-4000
 WARNING:tensorflow:From main_pretrain.py:214: start_queue_runners (from tensorflow.python.training.queue_runner_impl) is deprecated and will be removed in a future version.
 Instructions for updating:
 To construct input pipelines, use the `tf.data` module.
-W0924 19:16:47.150158 140061786756928 tf_logging.py:125] From main_pretrain.py:214: start_queue_runners (from tensorflow.python.training.queue_runner_impl) is deprecated and will be removed in a future version.
+W0924 20:15:15.999904 140427292555072 tf_logging.py:125] From main_pretrain.py:214: start_queue_runners (from tensorflow.python.training.queue_runner_impl) is deprecated and will be removed in a future version.
 Instructions for updating:
 To construct input pipelines, use the `tf.data` module.
 WARNING:tensorflow:`tf.train.start_queue_runners()` was called when no queue runners were defined. You can safely remove the call to this deprecated function.
-W0924 19:16:47.150527 140061786756928 tf_logging.py:125] `tf.train.start_queue_runners()` was called when no queue runners were defined. You can safely remove the call to this deprecated function.
-INFO:tensorflow:step: 11000, loss = 3.8226, lr = 0.001192
-I0924 19:16:54.856081 140061786756928 tf_logging.py:115] step: 11000, loss = 3.8226, lr = 0.001192
+W0924 20:15:16.000242 140427292555072 tf_logging.py:125] `tf.train.start_queue_runners()` was called when no queue runners were defined. You can safely remove the call to this deprecated function.
+INFO:tensorflow:step: 4000, loss = 3.1304, lr = 0.000699
+I0924 20:15:32.973838 140427292555072 tf_logging.py:115] step: 4000, loss = 3.1304, lr = 0.000699
 INFO:tensorflow:------------------ Evaluation bleu -------------------------
-I0924 19:16:55.077142 140061786756928 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
-INFO:tensorflow:2019-09-24 19:20:06.794368, Step: 11000, Valid bleu : 0.026192
-I0924 19:20:06.794470 140061786756928 tf_logging.py:115] 2019-09-24 19:20:06.794368, Step: 11000, Valid bleu : 0.026192
+I0924 20:15:33.343539 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 20:16:31.410939, Step: 4000, Valid bleu : 0.053917
+I0924 20:16:31.411034 140427292555072 tf_logging.py:115] 2019-09-24 20:16:31.410939, Step: 4000, Valid bleu : 0.053917
 INFO:tensorflow:--------------------- Finish evaluation ------------------------
-I0924 19:20:06.794827 140061786756928 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+I0924 20:16:31.411346 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-4000
+I0924 20:16:34.216648 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-4000
+INFO:tensorflow:step: 4200, loss = 3.2019, lr = 0.000734
+I0924 20:17:23.237965 140427292555072 tf_logging.py:115] step: 4200, loss = 3.2019, lr = 0.000734
+INFO:tensorflow:step: 4400, loss = 3.1917, lr = 0.000769
+I0924 20:18:11.871556 140427292555072 tf_logging.py:115] step: 4400, loss = 3.1917, lr = 0.000769
+INFO:tensorflow:step: 4600, loss = 2.7749, lr = 0.000804
+I0924 20:18:58.964540 140427292555072 tf_logging.py:115] step: 4600, loss = 2.7749, lr = 0.000804
+INFO:tensorflow:step: 4800, loss = 2.5268, lr = 0.000839
+I0924 20:19:48.045328 140427292555072 tf_logging.py:115] step: 4800, loss = 2.5268, lr = 0.000839
+INFO:tensorflow:step: 5000, loss = 2.5066, lr = 0.000873
+I0924 20:20:36.879651 140427292555072 tf_logging.py:115] step: 5000, loss = 2.5066, lr = 0.000873
+INFO:tensorflow:step: 5200, loss = 2.4411, lr = 0.000908
+I0924 20:21:25.836923 140427292555072 tf_logging.py:115] step: 5200, loss = 2.4411, lr = 0.000908
+INFO:tensorflow:step: 5400, loss = 2.0816, lr = 0.000943
+I0924 20:22:12.478573 140427292555072 tf_logging.py:115] step: 5400, loss = 2.0816, lr = 0.000943
+INFO:tensorflow:step: 5600, loss = 2.4290, lr = 0.000978
+I0924 20:23:01.380054 140427292555072 tf_logging.py:115] step: 5600, loss = 2.4290, lr = 0.000978
+INFO:tensorflow:step: 5800, loss = 2.5514, lr = 0.001013
+I0924 20:23:49.980697 140427292555072 tf_logging.py:115] step: 5800, loss = 2.5514, lr = 0.001013
+INFO:tensorflow:step: 6000, loss = 2.4585, lr = 0.001048
+I0924 20:24:38.868708 140427292555072 tf_logging.py:115] step: 6000, loss = 2.4585, lr = 0.001048
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 20:24:38.875844 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 20:25:34.730842, Step: 6000, Valid bleu : 0.117393
+I0924 20:25:34.730931 140427292555072 tf_logging.py:115] 2019-09-24 20:25:34.730842, Step: 6000, Valid bleu : 0.117393
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 20:25:34.731214 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-6000
+I0924 20:25:36.670801 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-6000
+INFO:tensorflow:step: 6200, loss = 2.5601, lr = 0.001083
+I0924 20:26:25.775182 140427292555072 tf_logging.py:115] step: 6200, loss = 2.5601, lr = 0.001083
+INFO:tensorflow:step: 6400, loss = 2.5594, lr = 0.001118
+I0924 20:27:14.392349 140427292555072 tf_logging.py:115] step: 6400, loss = 2.5594, lr = 0.001118
+INFO:tensorflow:step: 6600, loss = 2.4903, lr = 0.001153
+I0924 20:28:01.390729 140427292555072 tf_logging.py:115] step: 6600, loss = 2.4903, lr = 0.001153
+INFO:tensorflow:step: 6800, loss = 2.1082, lr = 0.001188
+I0924 20:28:49.789036 140427292555072 tf_logging.py:115] step: 6800, loss = 2.1082, lr = 0.001188
+INFO:tensorflow:step: 7000, loss = 2.1411, lr = 0.001223
+I0924 20:29:38.423553 140427292555072 tf_logging.py:115] step: 7000, loss = 2.1411, lr = 0.001223
+INFO:tensorflow:step: 7200, loss = 2.1677, lr = 0.001258
+I0924 20:30:26.906014 140427292555072 tf_logging.py:115] step: 7200, loss = 2.1677, lr = 0.001258
+INFO:tensorflow:step: 7400, loss = 2.3377, lr = 0.001293
+I0924 20:31:13.892227 140427292555072 tf_logging.py:115] step: 7400, loss = 2.3377, lr = 0.001293
+INFO:tensorflow:step: 7600, loss = 1.6065, lr = 0.001328
+I0924 20:32:02.840132 140427292555072 tf_logging.py:115] step: 7600, loss = 1.6065, lr = 0.001328
+INFO:tensorflow:step: 7800, loss = 2.2342, lr = 0.001363
+I0924 20:32:50.800339 140427292555072 tf_logging.py:115] step: 7800, loss = 2.2342, lr = 0.001363
+INFO:tensorflow:step: 8000, loss = 2.0995, lr = 0.001398
+I0924 20:33:39.166356 140427292555072 tf_logging.py:115] step: 8000, loss = 2.0995, lr = 0.001398
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 20:33:39.181282 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 20:34:31.029079, Step: 8000, Valid bleu : 0.133342
+I0924 20:34:31.029173 140427292555072 tf_logging.py:115] 2019-09-24 20:34:31.029079, Step: 8000, Valid bleu : 0.133342
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 20:34:31.029500 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-8000
+I0924 20:34:32.992709 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-8000
+INFO:tensorflow:step: 8200, loss = 2.1093, lr = 0.001380
+I0924 20:35:21.719952 140427292555072 tf_logging.py:115] step: 8200, loss = 2.1093, lr = 0.001380
+INFO:tensorflow:step: 8400, loss = 2.3118, lr = 0.001364
+I0924 20:36:10.650028 140427292555072 tf_logging.py:115] step: 8400, loss = 2.3118, lr = 0.001364
+INFO:tensorflow:step: 8600, loss = 1.7330, lr = 0.001348
+I0924 20:36:57.473417 140427292555072 tf_logging.py:115] step: 8600, loss = 1.7330, lr = 0.001348
+INFO:tensorflow:step: 8800, loss = 1.6375, lr = 0.001333
+I0924 20:37:46.294780 140427292555072 tf_logging.py:115] step: 8800, loss = 1.6375, lr = 0.001333
+INFO:tensorflow:step: 9000, loss = 2.0050, lr = 0.001318
+I0924 20:38:35.025135 140427292555072 tf_logging.py:115] step: 9000, loss = 2.0050, lr = 0.001318
+INFO:tensorflow:step: 9200, loss = 1.8293, lr = 0.001303
+I0924 20:39:23.981589 140427292555072 tf_logging.py:115] step: 9200, loss = 1.8293, lr = 0.001303
+INFO:tensorflow:step: 9400, loss = 1.8361, lr = 0.001289
+I0924 20:40:10.870802 140427292555072 tf_logging.py:115] step: 9400, loss = 1.8361, lr = 0.001289
+INFO:tensorflow:step: 9600, loss = 1.8665, lr = 0.001276
+I0924 20:40:58.268189 140427292555072 tf_logging.py:115] step: 9600, loss = 1.8665, lr = 0.001276
+INFO:tensorflow:step: 9800, loss = 1.9956, lr = 0.001263
+I0924 20:41:47.137038 140427292555072 tf_logging.py:115] step: 9800, loss = 1.9956, lr = 0.001263
+INFO:tensorflow:step: 10000, loss = 1.9610, lr = 0.001250
+I0924 20:42:36.218480 140427292555072 tf_logging.py:115] step: 10000, loss = 1.9610, lr = 0.001250
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 20:42:36.225964 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 20:43:30.002798, Step: 10000, Valid bleu : 0.148546
+I0924 20:43:30.002882 140427292555072 tf_logging.py:115] 2019-09-24 20:43:30.002798, Step: 10000, Valid bleu : 0.148546
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 20:43:30.003143 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-10000
+I0924 20:43:31.946223 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-10000
+INFO:tensorflow:step: 10200, loss = 1.8262, lr = 0.001238
+I0924 20:44:20.891670 140427292555072 tf_logging.py:115] step: 10200, loss = 1.8262, lr = 0.001238
+INFO:tensorflow:step: 10400, loss = 1.4375, lr = 0.001226
+I0924 20:45:10.268165 140427292555072 tf_logging.py:115] step: 10400, loss = 1.4375, lr = 0.001226
+INFO:tensorflow:step: 10600, loss = 1.6896, lr = 0.001214
+I0924 20:45:57.178445 140427292555072 tf_logging.py:115] step: 10600, loss = 1.6896, lr = 0.001214
+INFO:tensorflow:step: 10800, loss = 1.9343, lr = 0.001203
+I0924 20:46:46.408370 140427292555072 tf_logging.py:115] step: 10800, loss = 1.9343, lr = 0.001203
+INFO:tensorflow:step: 11000, loss = 1.9832, lr = 0.001192
+I0924 20:47:35.161107 140427292555072 tf_logging.py:115] step: 11000, loss = 1.9832, lr = 0.001192
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 20:47:35.168843 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 20:48:30.175159, Step: 11000, Valid bleu : 0.153712
+I0924 20:48:30.175261 140427292555072 tf_logging.py:115] 2019-09-24 20:48:30.175159, Step: 11000, Valid bleu : 0.153712
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 20:48:30.175554 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
 INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-11000
-I0924 19:20:08.800446 140061786756928 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-11000
-INFO:tensorflow:step: 11200, loss = 2.8693, lr = 0.001181
-I0924 19:20:47.421882 140061786756928 tf_logging.py:115] step: 11200, loss = 2.8693, lr = 0.001181
-INFO:tensorflow:step: 11400, loss = 3.6162, lr = 0.001171
-I0924 19:21:25.842413 140061786756928 tf_logging.py:115] step: 11400, loss = 3.6162, lr = 0.001171
-INFO:tensorflow:step: 11600, loss = 3.5821, lr = 0.001161
-I0924 19:22:04.022717 140061786756928 tf_logging.py:115] step: 11600, loss = 3.5821, lr = 0.001161
-INFO:tensorflow:step: 11800, loss = 3.7682, lr = 0.001151
-I0924 19:22:41.992786 140061786756928 tf_logging.py:115] step: 11800, loss = 3.7682, lr = 0.001151
-INFO:tensorflow:step: 12000, loss = 3.6932, lr = 0.001141
-I0924 19:23:20.100870 140061786756928 tf_logging.py:115] step: 12000, loss = 3.6932, lr = 0.001141
+I0924 20:48:32.086693 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-11000
+INFO:tensorflow:step: 11200, loss = 1.9113, lr = 0.001181
+I0924 20:49:21.119358 140427292555072 tf_logging.py:115] step: 11200, loss = 1.9113, lr = 0.001181
+INFO:tensorflow:step: 11400, loss = 2.1002, lr = 0.001171
+I0924 20:50:10.400865 140427292555072 tf_logging.py:115] step: 11400, loss = 2.1002, lr = 0.001171
+INFO:tensorflow:step: 11600, loss = 1.5778, lr = 0.001161
+I0924 20:50:59.122275 140427292555072 tf_logging.py:115] step: 11600, loss = 1.5778, lr = 0.001161
+INFO:tensorflow:step: 11800, loss = 1.8619, lr = 0.001151
+I0924 20:51:45.909308 140427292555072 tf_logging.py:115] step: 11800, loss = 1.8619, lr = 0.001151
+INFO:tensorflow:step: 12000, loss = 1.7373, lr = 0.001141
+I0924 20:52:34.864989 140427292555072 tf_logging.py:115] step: 12000, loss = 1.7373, lr = 0.001141
 INFO:tensorflow:------------------ Evaluation bleu -------------------------
-I0924 19:23:20.110318 140061786756928 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
-INFO:tensorflow:2019-09-24 19:27:13.908113, Step: 12000, Valid bleu : 0.031194
-I0924 19:27:13.908216 140061786756928 tf_logging.py:115] 2019-09-24 19:27:13.908113, Step: 12000, Valid bleu : 0.031194
+I0924 20:52:34.873171 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 20:53:27.662599, Step: 12000, Valid bleu : 0.155996
+I0924 20:53:27.662690 140427292555072 tf_logging.py:115] 2019-09-24 20:53:27.662599, Step: 12000, Valid bleu : 0.155996
 INFO:tensorflow:--------------------- Finish evaluation ------------------------
-I0924 19:27:13.908623 140061786756928 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+I0924 20:53:27.662987 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
 INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-12000
-I0924 19:27:15.275093 140061786756928 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-12000
-INFO:tensorflow:step: 12200, loss = 2.9025, lr = 0.001132
-I0924 19:27:52.084682 140061786756928 tf_logging.py:115] step: 12200, loss = 2.9025, lr = 0.001132
-INFO:tensorflow:step: 12400, loss = 3.4861, lr = 0.001123
-I0924 19:28:27.838723 140061786756928 tf_logging.py:115] step: 12400, loss = 3.4861, lr = 0.001123
-INFO:tensorflow:step: 12600, loss = 3.6990, lr = 0.001114
-I0924 19:29:04.299925 140061786756928 tf_logging.py:115] step: 12600, loss = 3.6990, lr = 0.001114
-INFO:tensorflow:step: 12800, loss = 3.0821, lr = 0.001105
-I0924 19:29:40.736730 140061786756928 tf_logging.py:115] step: 12800, loss = 3.0821, lr = 0.001105
-INFO:tensorflow:step: 13000, loss = 3.0132, lr = 0.001096
-I0924 19:30:17.393958 140061786756928 tf_logging.py:115] step: 13000, loss = 3.0132, lr = 0.001096
+I0924 20:53:29.614279 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-12000
+INFO:tensorflow:step: 12200, loss = 1.6707, lr = 0.001132
+I0924 20:54:18.288669 140427292555072 tf_logging.py:115] step: 12200, loss = 1.6707, lr = 0.001132
+INFO:tensorflow:step: 12400, loss = 1.7219, lr = 0.001123
+I0924 20:55:04.188512 140427292555072 tf_logging.py:115] step: 12400, loss = 1.7219, lr = 0.001123
+INFO:tensorflow:step: 12600, loss = 0.8083, lr = 0.001114
+I0924 20:55:53.203677 140427292555072 tf_logging.py:115] step: 12600, loss = 0.8083, lr = 0.001114
+INFO:tensorflow:step: 12800, loss = 1.6738, lr = 0.001105
+I0924 20:56:41.985952 140427292555072 tf_logging.py:115] step: 12800, loss = 1.6738, lr = 0.001105
+INFO:tensorflow:step: 13000, loss = 1.3371, lr = 0.001096
+I0924 20:57:29.154329 140427292555072 tf_logging.py:115] step: 13000, loss = 1.3371, lr = 0.001096
 INFO:tensorflow:------------------ Evaluation bleu -------------------------
-I0924 19:30:17.409196 140061786756928 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
-INFO:tensorflow:2019-09-24 19:34:18.471995, Step: 13000, Valid bleu : 0.036459
-I0924 19:34:18.472099 140061786756928 tf_logging.py:115] 2019-09-24 19:34:18.471995, Step: 13000, Valid bleu : 0.036459
+I0924 20:57:29.164082 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 20:58:21.958568, Step: 13000, Valid bleu : 0.164983
+I0924 20:58:21.958659 140427292555072 tf_logging.py:115] 2019-09-24 20:58:21.958568, Step: 13000, Valid bleu : 0.164983
 INFO:tensorflow:--------------------- Finish evaluation ------------------------
-I0924 19:34:18.472486 140061786756928 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+I0924 20:58:21.958955 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
 INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-13000
-I0924 19:34:19.790857 140061786756928 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-13000
-INFO:tensorflow:step: 13200, loss = 4.1198, lr = 0.001088
-I0924 19:34:56.975696 140061786756928 tf_logging.py:115] step: 13200, loss = 4.1198, lr = 0.001088
-INFO:tensorflow:step: 13400, loss = 2.8124, lr = 0.001080
-I0924 19:35:34.037582 140061786756928 tf_logging.py:115] step: 13400, loss = 2.8124, lr = 0.001080
-INFO:tensorflow:step: 13600, loss = 3.4830, lr = 0.001072
-I0924 19:36:10.672726 140061786756928 tf_logging.py:115] step: 13600, loss = 3.4830, lr = 0.001072
-INFO:tensorflow:step: 13800, loss = 3.5519, lr = 0.001064
-I0924 19:36:47.859483 140061786756928 tf_logging.py:115] step: 13800, loss = 3.5519, lr = 0.001064
-INFO:tensorflow:step: 14000, loss = 3.4634, lr = 0.001056
-I0924 19:37:25.303764 140061786756928 tf_logging.py:115] step: 14000, loss = 3.4634, lr = 0.001056
+I0924 20:58:23.877842 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-13000
+INFO:tensorflow:step: 13200, loss = 1.4675, lr = 0.001088
+I0924 20:59:12.493882 140427292555072 tf_logging.py:115] step: 13200, loss = 1.4675, lr = 0.001088
+INFO:tensorflow:step: 13400, loss = 1.5708, lr = 0.001080
+I0924 21:00:01.168719 140427292555072 tf_logging.py:115] step: 13400, loss = 1.5708, lr = 0.001080
+INFO:tensorflow:step: 13600, loss = 1.9359, lr = 0.001072
+I0924 21:00:47.531152 140427292555072 tf_logging.py:115] step: 13600, loss = 1.9359, lr = 0.001072
+INFO:tensorflow:step: 13800, loss = 1.6714, lr = 0.001064
+I0924 21:01:36.130303 140427292555072 tf_logging.py:115] step: 13800, loss = 1.6714, lr = 0.001064
+INFO:tensorflow:step: 14000, loss = 1.6368, lr = 0.001056
+I0924 21:02:24.757913 140427292555072 tf_logging.py:115] step: 14000, loss = 1.6368, lr = 0.001056
 INFO:tensorflow:------------------ Evaluation bleu -------------------------
-I0924 19:37:25.314253 140061786756928 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
-INFO:tensorflow:2019-09-24 19:41:14.875244, Step: 14000, Valid bleu : 0.039055
-I0924 19:41:14.875335 140061786756928 tf_logging.py:115] 2019-09-24 19:41:14.875244, Step: 14000, Valid bleu : 0.039055
+I0924 21:02:24.767755 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:03:14.704267, Step: 14000, Valid bleu : 0.167286
+I0924 21:03:14.704351 140427292555072 tf_logging.py:115] 2019-09-24 21:03:14.704267, Step: 14000, Valid bleu : 0.167286
 INFO:tensorflow:--------------------- Finish evaluation ------------------------
-I0924 19:41:14.875643 140061786756928 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+I0924 21:03:14.704628 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
 INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-14000
-I0924 19:41:16.223946 140061786756928 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-14000
-INFO:tensorflow:step: 14200, loss = 3.2329, lr = 0.001049
-I0924 19:41:53.695858 140061786756928 tf_logging.py:115] step: 14200, loss = 3.2329, lr = 0.001049
-INFO:tensorflow:step: 14400, loss = 2.6488, lr = 0.001042
-I0924 19:42:30.125315 140061786756928 tf_logging.py:115] step: 14400, loss = 2.6488, lr = 0.001042
-INFO:tensorflow:step: 14600, loss = 3.3734, lr = 0.001035
-I0924 19:43:07.572072 140061786756928 tf_logging.py:115] step: 14600, loss = 3.3734, lr = 0.001035
+I0924 21:03:16.601910 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-14000
+INFO:tensorflow:step: 14200, loss = 1.6233, lr = 0.001049
+I0924 21:04:05.656872 140427292555072 tf_logging.py:115] step: 14200, loss = 1.6233, lr = 0.001049
+INFO:tensorflow:step: 14400, loss = 1.5912, lr = 0.001042
+I0924 21:04:54.202605 140427292555072 tf_logging.py:115] step: 14400, loss = 1.5912, lr = 0.001042
+INFO:tensorflow:step: 14600, loss = 1.4869, lr = 0.001035
+I0924 21:05:42.453259 140427292555072 tf_logging.py:115] step: 14600, loss = 1.4869, lr = 0.001035
+INFO:tensorflow:step: 14800, loss = 1.5967, lr = 0.001027
+I0924 21:06:28.947466 140427292555072 tf_logging.py:115] step: 14800, loss = 1.5967, lr = 0.001027
+INFO:tensorflow:step: 15000, loss = 1.6895, lr = 0.001021
+I0924 21:07:16.551284 140427292555072 tf_logging.py:115] step: 15000, loss = 1.6895, lr = 0.001021
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:07:16.563313 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:08:16.830487, Step: 15000, Valid bleu : 0.159663
+I0924 21:08:16.830573 140427292555072 tf_logging.py:115] 2019-09-24 21:08:16.830487, Step: 15000, Valid bleu : 0.159663
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:08:16.830861 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:step: 15200, loss = 1.6488, lr = 0.001014
+I0924 21:09:04.247356 140427292555072 tf_logging.py:115] step: 15200, loss = 1.6488, lr = 0.001014
+INFO:tensorflow:step: 15400, loss = 1.5233, lr = 0.001007
+I0924 21:09:51.984097 140427292555072 tf_logging.py:115] step: 15400, loss = 1.5233, lr = 0.001007
+INFO:tensorflow:step: 15600, loss = 1.5394, lr = 0.001001
+I0924 21:10:40.330064 140427292555072 tf_logging.py:115] step: 15600, loss = 1.5394, lr = 0.001001
+INFO:tensorflow:step: 15800, loss = 1.6934, lr = 0.000994
+I0924 21:11:29.306515 140427292555072 tf_logging.py:115] step: 15800, loss = 1.6934, lr = 0.000994
+INFO:tensorflow:step: 16000, loss = 1.6700, lr = 0.000988
+I0924 21:12:16.012508 140427292555072 tf_logging.py:115] step: 16000, loss = 1.6700, lr = 0.000988
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:12:16.022449 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:13:07.256317, Step: 16000, Valid bleu : 0.169777
+I0924 21:13:07.256405 140427292555072 tf_logging.py:115] 2019-09-24 21:13:07.256317, Step: 16000, Valid bleu : 0.169777
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:13:07.256691 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-16000
+I0924 21:13:09.239058 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-16000
+INFO:tensorflow:step: 16200, loss = 1.8712, lr = 0.000982
+I0924 21:13:58.185906 140427292555072 tf_logging.py:115] step: 16200, loss = 1.8712, lr = 0.000982
+INFO:tensorflow:step: 16400, loss = 1.2847, lr = 0.000976
+I0924 21:14:47.064620 140427292555072 tf_logging.py:115] step: 16400, loss = 1.2847, lr = 0.000976
+INFO:tensorflow:step: 16600, loss = 1.6678, lr = 0.000970
+I0924 21:15:33.973250 140427292555072 tf_logging.py:115] step: 16600, loss = 1.6678, lr = 0.000970
+INFO:tensorflow:step: 16800, loss = 0.7591, lr = 0.000964
+I0924 21:16:22.340809 140427292555072 tf_logging.py:115] step: 16800, loss = 0.7591, lr = 0.000964
+INFO:tensorflow:step: 17000, loss = 1.4388, lr = 0.000959
+I0924 21:17:11.221335 140427292555072 tf_logging.py:115] step: 17000, loss = 1.4388, lr = 0.000959
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:17:11.232911 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:17:59.186393, Step: 17000, Valid bleu : 0.175549
+I0924 21:17:59.186505 140427292555072 tf_logging.py:115] 2019-09-24 21:17:59.186393, Step: 17000, Valid bleu : 0.175549
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:17:59.186882 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-17000
+I0924 21:18:01.165034 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-17000
+INFO:tensorflow:step: 17200, loss = 1.6132, lr = 0.000953
+I0924 21:18:50.172216 140427292555072 tf_logging.py:115] step: 17200, loss = 1.6132, lr = 0.000953
+INFO:tensorflow:step: 17400, loss = 1.3142, lr = 0.000948
+I0924 21:19:39.113387 140427292555072 tf_logging.py:115] step: 17400, loss = 1.3142, lr = 0.000948
+INFO:tensorflow:step: 17600, loss = 1.5925, lr = 0.000942
+I0924 21:20:28.320734 140427292555072 tf_logging.py:115] step: 17600, loss = 1.5925, lr = 0.000942
+INFO:tensorflow:step: 17800, loss = 1.5989, lr = 0.000937
+I0924 21:21:14.074660 140427292555072 tf_logging.py:115] step: 17800, loss = 1.5989, lr = 0.000937
+INFO:tensorflow:step: 18000, loss = 1.3721, lr = 0.000932
+I0924 21:22:03.238955 140427292555072 tf_logging.py:115] step: 18000, loss = 1.3721, lr = 0.000932
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:22:03.248781 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:22:55.949682, Step: 18000, Valid bleu : 0.173060
+I0924 21:22:55.949758 140427292555072 tf_logging.py:115] 2019-09-24 21:22:55.949682, Step: 18000, Valid bleu : 0.173060
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:22:55.950027 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-18000
+I0924 21:22:57.859518 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-18000
+INFO:tensorflow:step: 18200, loss = 1.3593, lr = 0.000927
+I0924 21:23:47.114516 140427292555072 tf_logging.py:115] step: 18200, loss = 1.3593, lr = 0.000927
+INFO:tensorflow:step: 18400, loss = 1.3907, lr = 0.000922
+I0924 21:24:34.184661 140427292555072 tf_logging.py:115] step: 18400, loss = 1.3907, lr = 0.000922
+INFO:tensorflow:step: 18600, loss = 1.4322, lr = 0.000917
+I0924 21:25:23.063786 140427292555072 tf_logging.py:115] step: 18600, loss = 1.4322, lr = 0.000917
+INFO:tensorflow:step: 18800, loss = 1.5328, lr = 0.000912
+I0924 21:26:12.002053 140427292555072 tf_logging.py:115] step: 18800, loss = 1.5328, lr = 0.000912
+INFO:tensorflow:step: 19000, loss = 1.4946, lr = 0.000907
+I0924 21:26:55.723833 140427292555072 tf_logging.py:115] step: 19000, loss = 1.4946, lr = 0.000907
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:26:55.732709 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:27:18.690167, Step: 19000, Valid bleu : 0.177179
+I0924 21:27:18.690262 140427292555072 tf_logging.py:115] 2019-09-24 21:27:18.690167, Step: 19000, Valid bleu : 0.177179
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:27:18.690537 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-19000
+I0924 21:27:20.616472 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-19000
+INFO:tensorflow:step: 19200, loss = 1.2286, lr = 0.000902
+I0924 21:27:53.570223 140427292555072 tf_logging.py:115] step: 19200, loss = 1.2286, lr = 0.000902
+INFO:tensorflow:step: 19400, loss = 0.7788, lr = 0.000897
+I0924 21:28:42.618550 140427292555072 tf_logging.py:115] step: 19400, loss = 0.7788, lr = 0.000897
+INFO:tensorflow:step: 19600, loss = 1.4734, lr = 0.000893
+I0924 21:29:32.012187 140427292555072 tf_logging.py:115] step: 19600, loss = 1.4734, lr = 0.000893
+INFO:tensorflow:step: 19800, loss = 1.6316, lr = 0.000888
+I0924 21:30:20.891541 140427292555072 tf_logging.py:115] step: 19800, loss = 1.6316, lr = 0.000888
+INFO:tensorflow:step: 20000, loss = 1.4908, lr = 0.000884
+I0924 21:31:08.093985 140427292555072 tf_logging.py:115] step: 20000, loss = 1.4908, lr = 0.000884
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:31:08.103410 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:32:00.373823, Step: 20000, Valid bleu : 0.181375
+I0924 21:32:00.373912 140427292555072 tf_logging.py:115] 2019-09-24 21:32:00.373823, Step: 20000, Valid bleu : 0.181375
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:32:00.374189 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-20000
+I0924 21:32:02.334277 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-20000
+INFO:tensorflow:step: 20200, loss = 1.5260, lr = 0.000879
+I0924 21:32:51.130016 140427292555072 tf_logging.py:115] step: 20200, loss = 1.5260, lr = 0.000879
+INFO:tensorflow:step: 20400, loss = 1.4667, lr = 0.000875
+I0924 21:33:37.564776 140427292555072 tf_logging.py:115] step: 20400, loss = 1.4667, lr = 0.000875
+INFO:tensorflow:step: 20600, loss = 1.3665, lr = 0.000871
+I0924 21:34:25.046168 140427292555072 tf_logging.py:115] step: 20600, loss = 1.3665, lr = 0.000871
+INFO:tensorflow:step: 20800, loss = 1.3182, lr = 0.000867
+I0924 21:35:13.872917 140427292555072 tf_logging.py:115] step: 20800, loss = 1.3182, lr = 0.000867
+INFO:tensorflow:step: 21000, loss = 1.4621, lr = 0.000863
+I0924 21:36:03.014281 140427292555072 tf_logging.py:115] step: 21000, loss = 1.4621, lr = 0.000863
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:36:03.028455 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:36:52.946800, Step: 21000, Valid bleu : 0.182001
+I0924 21:36:52.946887 140427292555072 tf_logging.py:115] 2019-09-24 21:36:52.946800, Step: 21000, Valid bleu : 0.182001
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:36:52.947166 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-21000
+I0924 21:36:54.942241 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-21000
+INFO:tensorflow:step: 21200, loss = 1.4030, lr = 0.000859
+I0924 21:37:44.080445 140427292555072 tf_logging.py:115] step: 21200, loss = 1.4030, lr = 0.000859
+INFO:tensorflow:step: 21400, loss = 1.4659, lr = 0.000854
+I0924 21:38:32.647571 140427292555072 tf_logging.py:115] step: 21400, loss = 1.4659, lr = 0.000854
+INFO:tensorflow:step: 21600, loss = 1.4432, lr = 0.000851
+I0924 21:39:21.640271 140427292555072 tf_logging.py:115] step: 21600, loss = 1.4432, lr = 0.000851
+INFO:tensorflow:step: 21800, loss = 1.2064, lr = 0.000847
+I0924 21:40:08.406600 140427292555072 tf_logging.py:115] step: 21800, loss = 1.2064, lr = 0.000847
+INFO:tensorflow:step: 22000, loss = 1.3962, lr = 0.000843
+I0924 21:40:56.735424 140427292555072 tf_logging.py:115] step: 22000, loss = 1.3962, lr = 0.000843
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:40:56.750013 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:41:48.267571, Step: 22000, Valid bleu : 0.184016
+I0924 21:41:48.267685 140427292555072 tf_logging.py:115] 2019-09-24 21:41:48.267571, Step: 22000, Valid bleu : 0.184016
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:41:48.268065 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-22000
+I0924 21:41:50.266441 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-22000
+INFO:tensorflow:step: 22200, loss = 1.3536, lr = 0.000839
+I0924 21:42:36.669160 140427292555072 tf_logging.py:115] step: 22200, loss = 1.3536, lr = 0.000839
+INFO:tensorflow:step: 22400, loss = 1.3711, lr = 0.000835
+I0924 21:43:25.284216 140427292555072 tf_logging.py:115] step: 22400, loss = 1.3711, lr = 0.000835
+INFO:tensorflow:step: 22600, loss = 1.4576, lr = 0.000831
+I0924 21:44:14.196547 140427292555072 tf_logging.py:115] step: 22600, loss = 1.4576, lr = 0.000831
+INFO:tensorflow:step: 22800, loss = 1.3692, lr = 0.000828
+I0924 21:45:02.620182 140427292555072 tf_logging.py:115] step: 22800, loss = 1.3692, lr = 0.000828
+INFO:tensorflow:step: 23000, loss = 1.3786, lr = 0.000824
+I0924 21:45:49.220651 140427292555072 tf_logging.py:115] step: 23000, loss = 1.3786, lr = 0.000824
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:45:49.234484 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:46:40.076216, Step: 23000, Valid bleu : 0.181285
+I0924 21:46:40.076319 140427292555072 tf_logging.py:115] 2019-09-24 21:46:40.076216, Step: 23000, Valid bleu : 0.181285
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:46:40.076595 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-23000
+I0924 21:46:41.991003 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-23000
+INFO:tensorflow:step: 23200, loss = 1.1250, lr = 0.000821
+I0924 21:47:30.352013 140427292555072 tf_logging.py:115] step: 23200, loss = 1.1250, lr = 0.000821
+INFO:tensorflow:step: 23400, loss = 1.3905, lr = 0.000817
+I0924 21:48:16.217910 140427292555072 tf_logging.py:115] step: 23400, loss = 1.3905, lr = 0.000817
+INFO:tensorflow:step: 23600, loss = 1.3760, lr = 0.000814
+I0924 21:49:05.513046 140427292555072 tf_logging.py:115] step: 23600, loss = 1.3760, lr = 0.000814
+INFO:tensorflow:step: 23800, loss = 1.2763, lr = 0.000810
+I0924 21:49:53.902346 140427292555072 tf_logging.py:115] step: 23800, loss = 1.2763, lr = 0.000810
+INFO:tensorflow:step: 24000, loss = 1.5203, lr = 0.000807
+I0924 21:50:42.441968 140427292555072 tf_logging.py:115] step: 24000, loss = 1.5203, lr = 0.000807
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:50:42.451042 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:51:31.217898, Step: 24000, Valid bleu : 0.183465
+I0924 21:51:31.218008 140427292555072 tf_logging.py:115] 2019-09-24 21:51:31.217898, Step: 24000, Valid bleu : 0.183465
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:51:31.218406 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-24000
+I0924 21:51:33.124444 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-24000
+INFO:tensorflow:step: 24200, loss = 1.3510, lr = 0.000804
+I0924 21:52:22.050619 140427292555072 tf_logging.py:115] step: 24200, loss = 1.3510, lr = 0.000804
+INFO:tensorflow:step: 24400, loss = 1.3247, lr = 0.000800
+I0924 21:53:10.736019 140427292555072 tf_logging.py:115] step: 24400, loss = 1.3247, lr = 0.000800
+INFO:tensorflow:step: 24600, loss = 1.3533, lr = 0.000797
+I0924 21:53:59.179610 140427292555072 tf_logging.py:115] step: 24600, loss = 1.3533, lr = 0.000797
+INFO:tensorflow:step: 24800, loss = 1.1596, lr = 0.000794
+I0924 21:54:45.786072 140427292555072 tf_logging.py:115] step: 24800, loss = 1.1596, lr = 0.000794
+INFO:tensorflow:step: 25000, loss = 1.2882, lr = 0.000791
+I0924 21:55:34.555119 140427292555072 tf_logging.py:115] step: 25000, loss = 1.2882, lr = 0.000791
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 21:55:34.566160 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 21:56:25.402687, Step: 25000, Valid bleu : 0.187237
+I0924 21:56:25.402779 140427292555072 tf_logging.py:115] 2019-09-24 21:56:25.402687, Step: 25000, Valid bleu : 0.187237
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 21:56:25.403080 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-25000
+I0924 21:56:27.345145 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-25000
+INFO:tensorflow:step: 25200, loss = 1.0904, lr = 0.000787
+I0924 21:57:14.279776 140427292555072 tf_logging.py:115] step: 25200, loss = 1.0904, lr = 0.000787
+INFO:tensorflow:step: 25400, loss = 1.2665, lr = 0.000784
+I0924 21:58:03.076756 140427292555072 tf_logging.py:115] step: 25400, loss = 1.2665, lr = 0.000784
+INFO:tensorflow:step: 25600, loss = 1.3423, lr = 0.000781
+I0924 21:58:52.049026 140427292555072 tf_logging.py:115] step: 25600, loss = 1.3423, lr = 0.000781
+INFO:tensorflow:step: 25800, loss = 1.4274, lr = 0.000778
+I0924 21:59:40.881182 140427292555072 tf_logging.py:115] step: 25800, loss = 1.4274, lr = 0.000778
+INFO:tensorflow:step: 26000, loss = 1.4840, lr = 0.000775
+I0924 22:00:26.719064 140427292555072 tf_logging.py:115] step: 26000, loss = 1.4840, lr = 0.000775
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 22:00:26.733210 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 22:01:17.606000, Step: 26000, Valid bleu : 0.184081
+I0924 22:01:17.606082 140427292555072 tf_logging.py:115] 2019-09-24 22:01:17.606000, Step: 26000, Valid bleu : 0.184081
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 22:01:17.606395 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:step: 26200, loss = 1.4447, lr = 0.000772
+I0924 22:02:06.675286 140427292555072 tf_logging.py:115] step: 26200, loss = 1.4447, lr = 0.000772
+INFO:tensorflow:step: 26400, loss = 1.1210, lr = 0.000769
+I0924 22:02:55.426881 140427292555072 tf_logging.py:115] step: 26400, loss = 1.1210, lr = 0.000769
+INFO:tensorflow:step: 26600, loss = 1.3042, lr = 0.000766
+I0924 22:03:42.412280 140427292555072 tf_logging.py:115] step: 26600, loss = 1.3042, lr = 0.000766
+INFO:tensorflow:step: 26800, loss = 1.3189, lr = 0.000764
+I0924 22:04:31.510051 140427292555072 tf_logging.py:115] step: 26800, loss = 1.3189, lr = 0.000764
+INFO:tensorflow:step: 27000, loss = 1.1773, lr = 0.000761
+I0924 22:05:20.527186 140427292555072 tf_logging.py:115] step: 27000, loss = 1.1773, lr = 0.000761
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 22:05:20.533382 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 22:06:08.793972, Step: 27000, Valid bleu : 0.185468
+I0924 22:06:08.794046 140427292555072 tf_logging.py:115] 2019-09-24 22:06:08.793972, Step: 27000, Valid bleu : 0.185468
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 22:06:08.794295 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-27000
+I0924 22:06:10.694709 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-27000
+INFO:tensorflow:step: 27200, loss = 1.3388, lr = 0.000758
+I0924 22:06:59.439318 140427292555072 tf_logging.py:115] step: 27200, loss = 1.3388, lr = 0.000758
+INFO:tensorflow:step: 27400, loss = 0.6779, lr = 0.000755
+I0924 22:07:48.562721 140427292555072 tf_logging.py:115] step: 27400, loss = 0.6779, lr = 0.000755
+INFO:tensorflow:step: 27600, loss = 1.4722, lr = 0.000752
+I0924 22:08:37.514931 140427292555072 tf_logging.py:115] step: 27600, loss = 1.4722, lr = 0.000752
+INFO:tensorflow:step: 27800, loss = 1.3202, lr = 0.000750
+I0924 22:09:24.327864 140427292555072 tf_logging.py:115] step: 27800, loss = 1.3202, lr = 0.000750
+INFO:tensorflow:step: 28000, loss = 1.2500, lr = 0.000747
+I0924 22:10:13.206124 140427292555072 tf_logging.py:115] step: 28000, loss = 1.2500, lr = 0.000747
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 22:10:13.222260 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 22:11:04.707163, Step: 28000, Valid bleu : 0.188627
+I0924 22:11:04.707252 140427292555072 tf_logging.py:115] 2019-09-24 22:11:04.707163, Step: 28000, Valid bleu : 0.188627
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 22:11:04.707510 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-28000
+I0924 22:11:06.640645 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-28000
+INFO:tensorflow:step: 28200, loss = 1.3527, lr = 0.000744
+I0924 22:11:53.650022 140427292555072 tf_logging.py:115] step: 28200, loss = 1.3527, lr = 0.000744
+INFO:tensorflow:step: 28400, loss = 1.3414, lr = 0.000742
+I0924 22:12:42.594828 140427292555072 tf_logging.py:115] step: 28400, loss = 1.3414, lr = 0.000742
+INFO:tensorflow:step: 28600, loss = 1.0946, lr = 0.000739
+I0924 22:13:31.112254 140427292555072 tf_logging.py:115] step: 28600, loss = 1.0946, lr = 0.000739
+INFO:tensorflow:step: 28800, loss = 1.4816, lr = 0.000737
+I0924 22:14:18.822346 140427292555072 tf_logging.py:115] step: 28800, loss = 1.4816, lr = 0.000737
+INFO:tensorflow:step: 29000, loss = 1.0842, lr = 0.000734
+I0924 22:15:05.460496 140427292555072 tf_logging.py:115] step: 29000, loss = 1.0842, lr = 0.000734
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 22:15:05.470379 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 22:15:55.432777, Step: 29000, Valid bleu : 0.190257
+I0924 22:15:55.432873 140427292555072 tf_logging.py:115] 2019-09-24 22:15:55.432777, Step: 29000, Valid bleu : 0.190257
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 22:15:55.433175 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-29000
+I0924 22:15:57.402665 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-29000
+INFO:tensorflow:step: 29200, loss = 1.2691, lr = 0.000732
+I0924 22:16:45.860985 140427292555072 tf_logging.py:115] step: 29200, loss = 1.2691, lr = 0.000732
+INFO:tensorflow:step: 29400, loss = 1.4004, lr = 0.000729
+I0924 22:17:34.744024 140427292555072 tf_logging.py:115] step: 29400, loss = 1.4004, lr = 0.000729
+INFO:tensorflow:step: 29600, loss = 1.3798, lr = 0.000727
+I0924 22:18:21.817420 140427292555072 tf_logging.py:115] step: 29600, loss = 1.3798, lr = 0.000727
+INFO:tensorflow:step: 29800, loss = 1.4231, lr = 0.000724
+I0924 22:19:10.769099 140427292555072 tf_logging.py:115] step: 29800, loss = 1.4231, lr = 0.000724
+INFO:tensorflow:step: 30000, loss = 0.6871, lr = 0.000722
+I0924 22:19:59.475896 140427292555072 tf_logging.py:115] step: 30000, loss = 0.6871, lr = 0.000722
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 22:19:59.483438 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 22:20:46.526115, Step: 30000, Valid bleu : 0.187608
+I0924 22:20:46.526199 140427292555072 tf_logging.py:115] 2019-09-24 22:20:46.526115, Step: 30000, Valid bleu : 0.187608
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 22:20:46.526495 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-30000
+I0924 22:20:48.460958 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-30000
+INFO:tensorflow:step: 30200, loss = 0.6255, lr = 0.000719
+I0924 22:21:37.288777 140427292555072 tf_logging.py:115] step: 30200, loss = 0.6255, lr = 0.000719
+INFO:tensorflow:step: 30400, loss = 1.1534, lr = 0.000717
+I0924 22:22:25.873713 140427292555072 tf_logging.py:115] step: 30400, loss = 1.1534, lr = 0.000717
+INFO:tensorflow:step: 30600, loss = 1.1008, lr = 0.000715
+I0924 22:23:14.490050 140427292555072 tf_logging.py:115] step: 30600, loss = 1.1008, lr = 0.000715
+INFO:tensorflow:step: 30800, loss = 1.4611, lr = 0.000712
+I0924 22:24:01.471704 140427292555072 tf_logging.py:115] step: 30800, loss = 1.4611, lr = 0.000712
+INFO:tensorflow:step: 31000, loss = 1.2011, lr = 0.000710
+I0924 22:24:50.389832 140427292555072 tf_logging.py:115] step: 31000, loss = 1.2011, lr = 0.000710
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 22:24:50.403824 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 22:25:40.407773, Step: 31000, Valid bleu : 0.191935
+I0924 22:25:40.407858 140427292555072 tf_logging.py:115] 2019-09-24 22:25:40.407773, Step: 31000, Valid bleu : 0.191935
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 22:25:40.408139 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-31000
+I0924 22:25:42.400809 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-31000
+INFO:tensorflow:step: 31200, loss = 1.2863, lr = 0.000708
+I0924 22:26:29.277110 140427292555072 tf_logging.py:115] step: 31200, loss = 1.2863, lr = 0.000708
+INFO:tensorflow:step: 31400, loss = 0.6619, lr = 0.000705
+I0924 22:27:18.223699 140427292555072 tf_logging.py:115] step: 31400, loss = 0.6619, lr = 0.000705
+INFO:tensorflow:step: 31600, loss = 0.7155, lr = 0.000703
+I0924 22:28:05.472523 140427292555072 tf_logging.py:115] step: 31600, loss = 0.7155, lr = 0.000703
+INFO:tensorflow:step: 31800, loss = 1.3331, lr = 0.000701
+I0924 22:28:54.367595 140427292555072 tf_logging.py:115] step: 31800, loss = 1.3331, lr = 0.000701
+INFO:tensorflow:step: 32000, loss = 0.6658, lr = 0.000699
+I0924 22:29:41.234335 140427292555072 tf_logging.py:115] step: 32000, loss = 0.6658, lr = 0.000699
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 22:29:41.243953 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 22:30:33.509359, Step: 32000, Valid bleu : 0.191309
+I0924 22:30:33.509446 140427292555072 tf_logging.py:115] 2019-09-24 22:30:33.509359, Step: 32000, Valid bleu : 0.191309
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 22:30:33.509722 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-32000
+I0924 22:30:35.428125 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-32000
+INFO:tensorflow:step: 32200, loss = 1.3072, lr = 0.000697
+I0924 22:31:24.182565 140427292555072 tf_logging.py:115] step: 32200, loss = 1.3072, lr = 0.000697
+INFO:tensorflow:step: 32400, loss = 1.3293, lr = 0.000694
+I0924 22:32:13.261458 140427292555072 tf_logging.py:115] step: 32400, loss = 1.3293, lr = 0.000694
+INFO:tensorflow:step: 32600, loss = 1.3076, lr = 0.000692
+I0924 22:32:59.995733 140427292555072 tf_logging.py:115] step: 32600, loss = 1.3076, lr = 0.000692
+INFO:tensorflow:step: 32800, loss = 0.7102, lr = 0.000690
+I0924 22:33:48.580606 140427292555072 tf_logging.py:115] step: 32800, loss = 0.7102, lr = 0.000690
+INFO:tensorflow:step: 33000, loss = 1.0993, lr = 0.000688
+I0924 22:34:37.470604 140427292555072 tf_logging.py:115] step: 33000, loss = 1.0993, lr = 0.000688
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 22:34:37.479206 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 22:35:24.669461, Step: 33000, Valid bleu : 0.193869
+I0924 22:35:24.669548 140427292555072 tf_logging.py:115] 2019-09-24 22:35:24.669461, Step: 33000, Valid bleu : 0.193869
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 22:35:24.669825 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-33000
+I0924 22:35:26.641869 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-33000
+INFO:tensorflow:step: 33200, loss = 1.1416, lr = 0.000686
+I0924 22:36:15.219447 140427292555072 tf_logging.py:115] step: 33200, loss = 1.1416, lr = 0.000686
+INFO:tensorflow:step: 33400, loss = 1.2742, lr = 0.000684
+I0924 22:37:04.388134 140427292555072 tf_logging.py:115] step: 33400, loss = 1.2742, lr = 0.000684
+INFO:tensorflow:step: 33600, loss = 1.1575, lr = 0.000682
+I0924 22:37:53.628312 140427292555072 tf_logging.py:115] step: 33600, loss = 1.1575, lr = 0.000682
+INFO:tensorflow:step: 33800, loss = 1.2620, lr = 0.000680
+I0924 22:38:40.671171 140427292555072 tf_logging.py:115] step: 33800, loss = 1.2620, lr = 0.000680
+INFO:tensorflow:step: 34000, loss = 1.2881, lr = 0.000678
+I0924 22:39:29.707961 140427292555072 tf_logging.py:115] step: 34000, loss = 1.2881, lr = 0.000678
+INFO:tensorflow:------------------ Evaluation bleu -------------------------
+I0924 22:39:29.720675 140427292555072 tf_logging.py:115] ------------------ Evaluation bleu -------------------------
+INFO:tensorflow:2019-09-24 22:40:20.724911, Step: 34000, Valid bleu : 0.193302
+I0924 22:40:20.724999 140427292555072 tf_logging.py:115] 2019-09-24 22:40:20.724911, Step: 34000, Valid bleu : 0.193302
+INFO:tensorflow:--------------------- Finish evaluation ------------------------
+I0924 22:40:20.725297 140427292555072 tf_logging.py:115] --------------------- Finish evaluation ------------------------
+INFO:tensorflow:Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-34000
+I0924 22:40:22.747341 140427292555072 tf_logging.py:115] Saving model at /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/model_save/train_base/model.ckpt-34000
+INFO:tensorflow:step: 34200, loss = 1.3118, lr = 0.000676
+I0924 22:41:10.881663 140427292555072 tf_logging.py:115] step: 34200, loss = 1.3118, lr = 0.000676
+INFO:tensorflow:step: 34400, loss = 1.3166, lr = 0.000674
+I0924 22:41:57.618577 140427292555072 tf_logging.py:115] step: 34400, loss = 1.3166, lr = 0.000674
+INFO:tensorflow:step: 34600, loss = 1.3689, lr = 0.000672
+I0924 22:42:46.967808 140427292555072 tf_logging.py:115] step: 34600, loss = 1.3689, lr = 0.000672
+INFO:tensorflow:step: 34800, loss = 1.2454, lr = 0.000670
+I0924 22:43:35.831976 140427292555072 tf_logging.py:115] step: 34800, loss = 1.2454, lr = 0.000670
+INFO:tensorflow:Best bleu is 0.19386929710618453
+I0924 22:44:22.404639 140427292555072 tf_logging.py:115] Best bleu is 0.19386929710618453
+/home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/data_total/gen_data/vocab.bpe.30000.src /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/data_total/gen_data/vocab.bpe.30000.tgt
+right here! 4000
+file_pattern /home/work/xiepan/xp_dial/gan_nmt/transformer_gan/data/en-tr/data_total/gen_data/*train*
+bucket_batch_sizes:  Tensor("Const:0", shape=(24,), dtype=int64)
+bucket_batch_sizes:  Tensor("Const_1:0", shape=(24,), dtype=int64)
+!!!!!!!!!!! right here, beam_size = 4!!!!!!!!!!!!

@@ -132,9 +132,11 @@ def build_graph(params):
                         gen_targets=deal_samples,
                         roll_num=flags_obj.roll_num,
                         discriminator=d_model,
-                        maxlen=50)
+                        roll_len=8,
+                        max_len=50)
                     g_loss = g_model.g_loss(gen_targets=deal_samples,
-                                            rewards=rewards)
+                                            rewards=rewards,
+                                            roll_len=10)
                     
                     xen_grads = optimizer.compute_gradients(xen_loss)
                     gen_grads = optimizer.compute_gradients(g_loss)

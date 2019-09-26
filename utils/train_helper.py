@@ -74,7 +74,7 @@ def update_checkpoint(var_list, replace_from, replace_to):
         elif replace_to in var_name:
             if "Adam" not in var_name:
                 new_name = var_name.replace(replace_to, replace_from)
-                tf.logging.info("Update {} from {}".format(var_name, new_name))
+                #tf.logging.info("Update {} from {}".format(var_name, new_name))
                 update_op.append(tf.assign(var, var_map[new_name]))
         else:
             print(var)
