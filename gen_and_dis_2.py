@@ -20,7 +20,7 @@ class Generator(Transformer):
             self.encoder_outputs = self.encode(real_inputs, self.attention_bias)
 
             def condition(given_num, _):
-                return given_num < roll_len
+                return given_num < max_len
 
             def inner_loop(given_num, given_y):
                 logits = self.decode(given_y, self.encoder_outputs, self.attention_bias)
@@ -48,14 +48,14 @@ class Generator(Transformer):
 
     def get_reward(self, real_inputs, real_targets, gen_targets, roll_num, discriminator, roll_len, max_len):
         real_loss = discriminator.get_loss(real_targets, real_inputs)  # [batch ,1]
-        # base_f_loss = discriminator.get_loss(gen_targets, real_inputs)
-        # base_reward = 1 / tf.maximum(base_f_loss / real_loss, 1)
+        base_f_loss = discriminator.get_loss(gen_targets, real_inputs)
+        base_reward = 1 / tf.maximum(base_f_loss / real_loss, 1)       # [batch ,1]
 
-        y_sample_mask = tf.cast(tf.not_equal(gen_targets[:, :roll_len], PAD_ID), tf.float32)
+        y_sample_mask = tf.cast(tf.not_equal(gen_targets[:, roll_len:roll_len+5], PAD_ID), tf.float32)
         rewards = []
         roll_losses = []
         for i in range(roll_num):
-            for given_num in range(1, roll_len + 1):
+            for given_num in range(roll_len, roll_len + 5):
                 tf.logging.info("roll_num: {}, given_num: {}".format(i, given_num))
                 roll_sample = self.build_padding_rollout_generator(
                     real_inputs=real_inputs,
@@ -67,7 +67,7 @@ class Generator(Transformer):
                     gen_targets=roll_sample,
                     real_inputs=real_inputs)  # [batch ,1]
                 roll_losses.append(roll_loss)
-                cur_reward = 1 / tf.maximum((roll_loss / real_loss) ** 2, 1)
+                cur_reward = 1 / tf.maximum(roll_loss / real_loss, 1) # [batch, 1]
                 if i == 0:
                     rewards.append(cur_reward)  # list, [batch,1] * roll_len
                 else:
@@ -81,9 +81,11 @@ class Generator(Transformer):
             #else:
             #    rewards[roll_len - 1] += last_reward
 
-        rewards = tf.concat(rewards, axis=1)
+        rewards = tf.concat(rewards, axis=1)  # [batch, 5]
         rewards = rewards * y_sample_mask
         rewards = rewards / (1. * roll_num)  # [batch, roll_len]
+        # reduce baseline
+        rewards = tf.maximum(rewards - base_reward, -0.1)
         roll_mean_loss = tf.reduce_mean(tf.concat(roll_losses, axis=1))
         real_mean_loss = tf.reduce_mean(real_loss)
         return rewards, roll_mean_loss, real_mean_loss
@@ -96,7 +98,7 @@ class Generator(Transformer):
         :param rewards:  [batch, ]
         :return:
         """
-        gen_targets = gen_targets[:, :roll_len]
+        gen_targets = gen_targets[:, roll_len:roll_len+5]
         with tf.variable_scope(self.name_scope, initializer=self.initializer, reuse=tf.AUTO_REUSE):
             logits = self.decode(targets=gen_targets, encoder_outputs=self.encoder_outputs,
                                  attention_bias=self.attention_bias)  # [batch, dec_len, vocab_size]

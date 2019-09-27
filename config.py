@@ -60,7 +60,10 @@ flags.DEFINE_integer(
 flags.DEFINE_integer(
     name="max_length", short_name="ml", default=5,
     help="Maximum length of example.")
-# assert not (multi_gpu and num_gpu)
+
+flags.DEFINE_integer(
+    name="roll_len", short_name="rl", default=1,
+    help="rollout start time step .")
 
 flags.DEFINE_integer(
     name="extra_decode_length", short_name="edl", default=20,    

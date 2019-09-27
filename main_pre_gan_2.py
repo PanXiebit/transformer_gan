@@ -132,11 +132,11 @@ def build_graph(params):
                         gen_targets=deal_samples,
                         roll_num=flags_obj.roll_num,
                         discriminator=d_model,
-                        roll_len=8,
-                        max_len=50)
+                        roll_len=flags_obj.roll_len,
+                        max_len=params.max_length)
                     g_loss = g_model.g_loss(gen_targets=deal_samples,
                                             rewards=rewards,
-                                            roll_len=10)
+                                            roll_len=flags_obj.roll_len)
                     
                     xen_grads = optimizer.compute_gradients(xen_loss)
                     gen_grads = optimizer.compute_gradients(g_loss)
@@ -229,20 +229,20 @@ def train(params):
             sess.run(update_op)
             for step in xrange(init_step, flags_obj.train_steps):
                 g_steps_per_iter = 5
-                for g_step in range(g_steps_per_iter):
-                    _, x_loss_value, g_loss_value, rewards_value, roll_loss, real_loss = sess.run(
-                        [train_op, xen_loss, g_loss, rewards, roll_mean_loss, real_mean_loss],
-                        feed_dict={g_model.dropout_rate: 0.0,
-                                   d_model.dropout_rate: 0.1})
+                #for g_step in range(g_steps_per_iter):
+                _, x_loss_value, g_loss_value, rewards_value, roll_loss, real_loss = sess.run(
+                    [train_op, xen_loss, g_loss, rewards, roll_mean_loss, real_mean_loss],
+                    feed_dict={g_model.dropout_rate: 0.0,
+                               d_model.dropout_rate: 0.1})
 
-                    assert not np.isnan(g_loss_value), 'Model diverged with loss = NaN'
-                    assert not np.isnan(x_loss_value), 'Model diverged with loss = NaN'
+                assert not np.isnan(g_loss_value), 'Model diverged with loss = NaN'
+                assert not np.isnan(x_loss_value), 'Model diverged with loss = NaN'
 
-                    if step % 50 == 0:
-                        tf.logging.info(
-                            "step = {}, g_loss = {:.4f}, x_loss = {:.4f}, roll_loss = {:.4f}, "
-                            "real_loss = {:.4f}, reward = {}".format(
-                                step, g_loss_value, x_loss_value, roll_loss, real_loss, rewards_value[:5]))
+                if step % 50 == 0:
+                    tf.logging.info(
+                        "step = {}, g_loss = {:.4f}, x_loss = {:.4f}, roll_loss = {:.4f}, "
+                        "real_loss = {:.4f}, reward = {}".format(
+                            step, g_loss_value, x_loss_value, roll_loss, real_loss, rewards_value[:5]))
 
                 # train discriminator
                 sess.run(update_op)
