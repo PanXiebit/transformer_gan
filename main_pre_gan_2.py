@@ -126,7 +126,7 @@ def build_graph(params):
                     # g_loss
                     gen_samples = g_model.inference(train_iterator.source, None)["outputs"]
                     deal_samples = train_helper._trim_and_pad(gen_samples)
-                    rewards = g_model.get_reward(
+                    rewards, base_rewards = g_model.get_reward(
                         real_inputs=train_iterator.source,
                         real_targets=train_iterator.target,
                         gen_targets=deal_samples,
@@ -173,7 +173,7 @@ def build_graph(params):
     train_op = tf.group(apply_gradient_op, g_apply_gradient_op)
 
     train_return = (train_op, global_step, g_loss, xen_loss, rewards,
-                    learning_rate, init_step)
+                    learning_rate, init_step, base_rewards)
     valid_return = (val_pred, valid_iterator.target, valid_iterator.source)
     dataset_iter = (train_iterator, valid_iterator)
     return g_model, d_model, train_return, valid_return, dataset_iter
@@ -182,7 +182,7 @@ def train(params):
     with tf.Graph().as_default(), tf.device('/cpu:0'):
         g_model, d_model, train_return, valid_return, dataset_iter = build_graph(params)
         train_op, global_step, g_loss, xen_loss, rewards, learning_rate, \
-            init_step = train_return
+            init_step, base_rewards = train_return
         val_pred, val_tgt, val_src = valid_return
         train_iterator, valid_iterator = dataset_iter
 
@@ -230,8 +230,8 @@ def train(params):
             for step in xrange(init_step, flags_obj.train_steps):
                 g_steps_per_iter = 5
                 #for g_step in range(g_steps_per_iter):
-                _, x_loss_value, g_loss_value, rewards_value = sess.run(
-                    [train_op, xen_loss, g_loss, rewards],
+                _, x_loss_value, g_loss_value, rewards_value, base_rewards_value = sess.run(
+                    [train_op, xen_loss, g_loss, rewards, base_rewards],
                     feed_dict={g_model.dropout_rate: 0.0,
                                d_model.dropout_rate: 0.1})
 
@@ -240,8 +240,8 @@ def train(params):
 
                 if step % 50 == 0:
                     tf.logging.info(
-                        "step = {}, g_loss = {:.4f}, x_loss = {:.4f}, reward = {}".format(
-                            step, g_loss_value, x_loss_value, rewards_value[:5]))
+                        "step = {}, g_loss = {:.4f}, x_loss = {:.4f}, reward = {}, base_rewards = {}".format(
+                            step, g_loss_value, x_loss_value, rewards_value[:5], base_rewards_value[:5]))
 
                 # train discriminator
                 sess.run(update_op)
