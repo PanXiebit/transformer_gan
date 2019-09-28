@@ -46,14 +46,55 @@ class Generator(Transformer):
             )
             return roll_sample
 
+    #def get_reward_loss(self, real_inputs, real_targets, gen_targets, roll_num, discriminator, roll_len, max_len):
+    #    real_loss = discriminator.get_loss(real_targets, real_inputs)  # [batch ,1]
+    #    base_f_loss = discriminator.get_loss(gen_targets, real_inputs)
+    #    base_reward = 1 / tf.maximum(base_f_loss / real_loss, 1)       # [batch ,1]
+
+    #    y_sample_mask = tf.cast(tf.not_equal(gen_targets[:, roll_len:roll_len+5], PAD_ID), tf.float32)
+    #    rewards = []
+    #    roll_losses = []
+    #    for i in range(roll_num):
+    #        for given_num in range(roll_len, roll_len + 5):
+    #            tf.logging.info("roll_num: {}, given_num: {}".format(i, given_num))
+    #            roll_sample = self.build_padding_rollout_generator(
+    #                real_inputs=real_inputs,
+    #                gen_samples=gen_targets,
+    #                max_len=max_len,
+    #                roll_len=roll_len,
+    #                given_num=given_num)
+    #            roll_loss = discriminator.get_loss(
+    #                gen_targets=roll_sample,
+    #                real_inputs=real_inputs)  # [batch ,1]
+    #            roll_losses.append(roll_loss)
+    #            cur_reward = 1 / tf.maximum(roll_loss / real_loss, 1) # [batch, 1]
+    #            if i == 0:
+    #                rewards.append(cur_reward)  # list, [batch,1] * roll_len
+    #            else:
+    #                rewards[given_num - 1] += cur_reward
+
+    #        #roll_loss = discriminator.get_loss(gen_targets=gen_targets,
+    #        #                                   real_inputs=real_inputs)
+    #        #last_reward = 1 / tf.maximum((roll_loss / real_loss) ** 3, 1)
+    #        #if i == 0:
+    #        #    rewards.append(last_reward)
+    #        #else:
+    #        #    rewards[roll_len - 1] += last_reward
+
+    #    rewards = tf.concat(rewards, axis=1)  # [batch, 5]
+    #    rewards = rewards * y_sample_mask
+    #    rewards = rewards / (1. * roll_num)  # [batch, roll_len]
+    #    # reduce baseline
+    #    rewards = tf.maximum(rewards - base_reward, 0.0)
+    #    roll_mean_loss = tf.reduce_mean(tf.concat(roll_losses, axis=1))
+    #    real_mean_loss = tf.reduce_mean(real_loss)
+    #    return rewards, roll_mean_loss, real_mean_loss
+
     def get_reward(self, real_inputs, real_targets, gen_targets, roll_num, discriminator, roll_len, max_len):
-        real_loss = discriminator.get_loss(real_targets, real_inputs)  # [batch ,1]
-        base_f_loss = discriminator.get_loss(gen_targets, real_inputs)
-        base_reward = 1 / tf.maximum(base_f_loss / real_loss, 1)       # [batch ,1]
+        base_reward = discriminator.get_bleu(real_targets, real_inputs)  # [batch ,1]
 
         y_sample_mask = tf.cast(tf.not_equal(gen_targets[:, roll_len:roll_len+5], PAD_ID), tf.float32)
         rewards = []
-        roll_losses = []
         for i in range(roll_num):
             for given_num in range(roll_len, roll_len + 5):
                 tf.logging.info("roll_num: {}, given_num: {}".format(i, given_num))
@@ -61,34 +102,22 @@ class Generator(Transformer):
                     real_inputs=real_inputs,
                     gen_samples=gen_targets,
                     max_len=max_len,
-                    roll_len=roll_len,
                     given_num=given_num)
-                roll_loss = discriminator.get_loss(
+                cur_reward = discriminator.get_bleu(
                     gen_targets=roll_sample,
                     real_inputs=real_inputs)  # [batch ,1]
-                roll_losses.append(roll_loss)
-                cur_reward = 1 / tf.maximum(roll_loss / real_loss, 1) # [batch, 1]
                 if i == 0:
                     rewards.append(cur_reward)  # list, [batch,1] * roll_len
                 else:
                     rewards[given_num - 1] += cur_reward
-
-            #roll_loss = discriminator.get_loss(gen_targets=gen_targets,
-            #                                   real_inputs=real_inputs)
-            #last_reward = 1 / tf.maximum((roll_loss / real_loss) ** 3, 1)
-            #if i == 0:
-            #    rewards.append(last_reward)
-            #else:
-            #    rewards[roll_len - 1] += last_reward
 
         rewards = tf.concat(rewards, axis=1)  # [batch, 5]
         rewards = rewards * y_sample_mask
         rewards = rewards / (1. * roll_num)  # [batch, roll_len]
         # reduce baseline
         rewards = tf.maximum(rewards - base_reward, 0.0)
-        roll_mean_loss = tf.reduce_mean(tf.concat(roll_losses, axis=1))
-        real_mean_loss = tf.reduce_mean(real_loss)
-        return rewards, roll_mean_loss, real_mean_loss
+        return rewards
+
 
     def g_loss(self, gen_targets, rewards, roll_len):
         """
@@ -134,6 +163,16 @@ class Discriminator(Transformer):
                                                                   self.params.target_vocab_size)
             loss = tf.reduce_sum(xentropy, axis=1) / tf.reduce_sum(weights, axis=1)  # [batch, 1]
             return tf.reshape(loss, (-1, 1))
+    
+    def get_bleu(self, gen_targets, real_inputs):
+        with tf.variable_scope(self.name_scope, initializer=self.initializer, reuse=tf.AUTO_REUSE):
+            attention_bias = model_utils.get_padding_bias(gen_targets)
+            encoder_outputs = self.encode(gen_targets, attention_bias)
+
+            logits = self.decode(real_inputs, encoder_outputs, attention_bias)
+            prediction = tf.argmax(logits, axis=-1)  # [batch, ori_inp_len]
+            bleu = tf.py_func(metrics.compute_bleu_batch, (real_inputs, prediction), tf.float32)
+            return tf.reshape(bleu, (-1,1))   # [batch,]
 
 
 if __name__ == "__main__":
