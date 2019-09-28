@@ -85,7 +85,7 @@ class Generator(Transformer):
         rewards = rewards * y_sample_mask
         rewards = rewards / (1. * roll_num)  # [batch, roll_len]
         # reduce baseline
-        rewards = tf.maximum(rewards - base_reward, -0.1)
+        rewards = tf.maximum(rewards - base_reward, 0.0)
         roll_mean_loss = tf.reduce_mean(tf.concat(roll_losses, axis=1))
         real_mean_loss = tf.reduce_mean(real_loss)
         return rewards, roll_mean_loss, real_mean_loss
