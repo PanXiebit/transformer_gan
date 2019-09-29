@@ -240,8 +240,8 @@ def train(params):
 
                 if step % 50 == 0:
                     tf.logging.info(
-                        "step = {}, g_loss = {:.4f}, x_loss = {:.4f}, reward = {}, base_rewards = {}".format(
-                            step, g_loss_value, x_loss_value, rewards_value[:5], base_rewards_value[:5]))
+                        "{}, step = {}, g_loss = {:.4f}, x_loss = {:.4f}, reward = {}, base_rewards = {}".format(
+                            datetime.now(), step, g_loss_value, x_loss_value, rewards_value[:5], base_rewards_value[:5]))
 
                 # train discriminator
                 sess.run(update_op)

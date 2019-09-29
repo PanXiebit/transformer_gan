@@ -298,6 +298,8 @@ def compute_bleu_batch(reference_corpus, translation_corpus, max_order=4,
     possible_matches_by_order_batch = []
 
     for (references, translations) in zip(reference_corpus, translation_corpus):
+        references = _trim(references)
+        translations = _trim(translations)
         matches_by_order = [0] * max_order
         possible_matches_by_order = [0] * max_order
 

@@ -91,7 +91,7 @@ class Generator(Transformer):
        return rewards, roll_mean_loss, real_mean_loss
 
     def get_reward(self, real_inputs, real_targets, gen_targets, roll_num, discriminator, roll_len, max_len):
-        base_reward = discriminator.get_bleu(real_targets, real_inputs)  # [batch ,1]
+        base_reward = discriminator.get_bleu(gen_targets, real_inputs)  # [batch ,1]
 
         y_sample_mask = tf.cast(tf.not_equal(gen_targets[:, roll_len:roll_len+5], PAD_ID), tf.float32)
         rewards = []
