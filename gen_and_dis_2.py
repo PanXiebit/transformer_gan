@@ -35,7 +35,7 @@ class Generator(Transformer):
 
             given_y = gen_samples[:, :given_num]
             init_given_y = tf.pad(given_y, [[0, 0], [0, max_len - given_num]])
-            init_given_num = tf.constant(given_num)
+            init_given_num = given_num
 
             given_num, roll_sample = tf.while_loop(
                 cond=condition,
@@ -145,7 +145,7 @@ class Generator(Transformer):
             total_rewards.append(cur_reward)  # list, [batch,1] * roll_num
         self.total_rewards = tf.reduce_mean(tf.concat(total_rewards, axis=1), axis=1)  # [bacth, roll_num] -> [batch, ]
         total_rewards_mb = tf.maximum(0.0, self.total_rewards - tf.reshape(self.baseline, [-1]))
-        return given_num, total_rewards_mb
+        return given_num, total_rewards_mb, self.baseline
 
     def g_loss(self, gen_targets, rewards, roll_len):
         """
@@ -173,6 +173,18 @@ class Generator(Transformer):
             g_loss = - tf.reduce_sum(log_probs * tf.reshape(rewards, [-1])) / tf.to_float(batch_size)
             return g_loss
 
+    def get_one_g_loss(self, gen_targets, given_num, rewards):
+        given_y = gen_targets[:, :given_num]
+        with tf.variable_scope(self.name_scope, initializer=self.initializer, reuse=tf.AUTO_REUSE):
+            logits = self.decode(targets=given_y, encoder_outputs=self.encoder_outputs,
+                                 attention_bias=self.attention_bias)
+            batch_size = tf.shape(gen_targets)[0]
+            probs = tf.nn.softmax(logits[:, -1, :], axis=-1) # probability, [batch, dec_vocab_size]
+            log_probs = tf.reduce_sum(tf.one_hot(given_y[:, -1], self.params.target_vocab_size, 1.0, 0.0) * tf.log(
+                tf.clip_by_value(probs, 1e-20, 1.0)), axis=1)
+            rewards = tf.stop_gradient(rewards)
+            g_loss = - tf.reduce_sum(log_probs * tf.reshape(rewards, [-1])) / tf.to_float(batch_size)
+            return g_loss
 
 class Discriminator(Transformer):
     def __init__(self, params, is_train, name_scope, mode=None):
