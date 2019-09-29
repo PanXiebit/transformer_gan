@@ -340,6 +340,9 @@ def compute_bleu_batch(reference_corpus, translation_corpus, max_order=4,
 
         if use_bp:
             ratio = translation_length / reference_length
+            if ratio == 0:
+                tf.logging.info("!!!!!!ratio is zero!!!!")
+                pass
             bp = math.exp(1 - 1. / ratio) if ratio < 1.0 else 1.0
         bleu = geo_mean * bp
         bleu_batch.append(bleu)

@@ -126,14 +126,11 @@ def build_graph(params):
                     # g_loss
                     gen_samples = g_model.inference(train_iterator.source, None)["outputs"]
                     deal_samples = train_helper._trim_and_pad(gen_samples)
-                    rewards, base_rewards = g_model.get_reward(
-                        real_inputs=train_iterator.source,
-                        real_targets=train_iterator.target,
+                    rewards, base_rewards = g_model.get_one_reward(
+                        origin_inputs=train_iterator.source,
                         gen_targets=deal_samples,
                         roll_num=flags_obj.roll_num,
-                        discriminator=d_model,
-                        roll_len=flags_obj.roll_len,
-                        max_len=params.max_length)
+                        disc=d_model)
                     g_loss = g_model.g_loss(gen_targets=deal_samples,
                                             rewards=rewards,
                                             roll_len=flags_obj.roll_len)
