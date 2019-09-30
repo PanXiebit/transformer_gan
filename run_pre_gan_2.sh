@@ -1,7 +1,7 @@
 #!bin/bash
 
 
-export CUDA_VISIBLE_DEVICES="1,2"
+export CUDA_VISIBLE_DEVICES="2,1"
 export LD_LIBRARY_PATH=/usr/local/nccl_2.3.4/lib:$LD_LIBRARY_PATH
 
 BASE_DIR=/home/work/xiepan/xp_dial/gan_nmt/transformer_gan
@@ -16,7 +16,7 @@ python3 main_pre_gan_2.py \
     --model_dir ${BASE_DIR}/data/en-tr/model_save/train_base_gan_3 \
     --pretrain_dir ${BASE_DIR}/data/en-tr/model_save/train_base \
     --learning_rate 2.0 \
-    --batch_size  800 \
+    --batch_size  2000 \
     --max_length 50 \
     --roll_len ${ROLL_LEN} \
     --fro src \

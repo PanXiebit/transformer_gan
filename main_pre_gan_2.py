@@ -114,8 +114,7 @@ def build_graph(params):
         params.learning_rate, params.hidden_size,
         params.learning_rate_warmup_steps,
         global_step)
-    #
-    #
+    
     # g_optimizer = tf.contrib.opt.LazyAdamOptimizer(
     #     g_lr,
     #     beta1=params.optimizer_adam_beta1,
@@ -181,8 +180,8 @@ def build_graph(params):
     apply_gradient_op = x_optimizer.apply_gradients(x_grads, global_step=global_step)
     g_apply_gradient_op = g_optimizer.apply_gradients(g_grads, global_step=global_step)
 
-    # train_op = tf.group(apply_gradient_op, g_apply_gradient_op)
-    train_op = g_apply_gradient_op
+    train_op = tf.group(apply_gradient_op, g_apply_gradient_op)
+    #train_op = g_apply_gradient_op    
     train_return = (train_op, global_step, g_loss, xen_loss, rewards,
                     g_lr, init_step, base_rewards)
     valid_return = (val_pred, valid_iterator.target, valid_iterator.source)

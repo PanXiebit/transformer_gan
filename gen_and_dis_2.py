@@ -118,7 +118,7 @@ class Generator(Transformer):
         return rewards, base_reward
 
     def get_one_reward(self, origin_inputs, gen_targets, roll_num, disc):
-        self.baseline = disc.get_bleu(origin_inputs=origin_inputs,
+        self.baseline = disc.get_bleu(real_inputs=origin_inputs,
                                       gen_targets=gen_targets)
         max_len = tf.shape(gen_targets)[1]
         lengths = tf.reduce_sum(tf.cast(tf.not_equal(gen_targets, PAD_ID), tf.int32), axis=1)
@@ -139,7 +139,7 @@ class Generator(Transformer):
             )
             # print("roll_sample", roll_sample)
             cur_reward = disc.get_bleu(
-                origin_inputs=origin_inputs,
+                real_inputs=origin_inputs,
                 gen_targets=roll_sample
             )  # [batch ,1]
             total_rewards.append(cur_reward)  # list, [batch,1] * roll_num
