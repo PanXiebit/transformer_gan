@@ -98,11 +98,11 @@ def build_graph(params):
         init_step = 0
         global_step = tf.Variable(init_step, trainable=False, name="global_step")
 
-    x_lr = get_learning_rate(
-        params.learning_rate, params.hidden_size,
-        params.learning_rate_warmup_steps,
-        global_step)
-
+    #x_lr = get_learning_rate(
+    #    params.learning_rate, params.hidden_size,
+    #    params.learning_rate_warmup_steps,
+    #    global_step)
+    x_lr = 0.0001
     x_optimizer = tf.contrib.opt.LazyAdamOptimizer(
         x_lr,
         beta1=params.optimizer_adam_beta1,
@@ -110,16 +110,17 @@ def build_graph(params):
         epsilon=params.optimizer_adam_epsilon)
 
 
-    g_lr = get_learning_rate(
-        params.learning_rate, params.hidden_size,
-        params.learning_rate_warmup_steps,
-        global_step)
+    #g_lr = get_learning_rate(
+    #    params.learning_rate, params.hidden_size,
+    #    params.learning_rate_warmup_steps,
+    #    global_step)
     
     # g_optimizer = tf.contrib.opt.LazyAdamOptimizer(
     #     g_lr,
     #     beta1=params.optimizer_adam_beta1,
     #     beta2=params.optimizer_adam_beta2,
     #     epsilon=params.optimizer_adam_epsilon)
+    g_lr = 0.0001
     g_optimizer = tf.train.RMSPropOptimizer(learning_rate=g_lr)
 
     tower_grads = []
